@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://tomer123:7ilqKb9GlxfMp5IG@wannajam.ir4op.mongodb.net/WannaJam-App"
+  "mongoURI": "mongodb+srv://tomer123:7ilqKb9GlxfMp5IG@wannajam.ir4op.mongodb.net/WannaJam-App",
+  "JWT-KEY": "ramamama123"
 }
