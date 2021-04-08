@@ -25,9 +25,9 @@ router.post("/", auth, async (req, res) => {
   try {
     post = await profile.save();
     //Attach new profile to the user's "profiles" array
-    let user = await UserModel.findById(req.user._id);
-    user.profiles.push(post);
-    await user.save();
+    // let user = await UserModel.findById(req.user._id);
+    // user.profiles.push(post);
+    // await user.save();
     res.send(post);
   } catch (err) {
     console.log(err.message);
@@ -133,19 +133,6 @@ router.get("/user/:user_id", auth, async (req, res) => {
   }
 });
 
-router.get("/:id", auth, async (req, res) => {
-  const theId = req.params.id;
-  try {
-    let profile = await ProfileModel.findOne({ _id: theId });
-    if (!profile) return res.status(400).send("Profile not found");
-
-    res.json(profile);
-  } catch (err) {
-    console.log(err.message);
-    res.status(500).send("Server Error, Please try again later");
-  }
-});
-
 // @route   GET api/profile
 // @desc    Get all profiles
 // @access  Private
@@ -162,17 +149,16 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// @route   PUT api/profile/education/profile_id
+// @route   PUT api/profile/education
 // @desc    Add to "education" array
 // @access  Private
 
-router.put("/education/:id", auth, async (req, res) => {
+router.put("/education", auth, async (req, res) => {
   const { error } = validateEducation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   try {
     let profile = await ProfileModel.findOne({
-      _id: req.params.id,
       user: req.user._id,
     });
     if (!profile) return res.status(404).send("Profile not found");
@@ -186,17 +172,16 @@ router.put("/education/:id", auth, async (req, res) => {
   }
 });
 
-// @route   PUT api/skills/profile_id
+// @route   PUT api/skills
 // @desc    Add to "skills" array
 // @access  Private
 
-router.put("/skills/:id", auth, async (req, res) => {
+router.put("/skills", auth, async (req, res) => {
   const { error } = validateSkills(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   try {
     let profile = await ProfileModel.findOne({
-      _id: req.params.id,
       user: req.user._id,
     });
     if (!profile) return res.status(404).send("Profile not found");
@@ -210,14 +195,14 @@ router.put("/skills/:id", auth, async (req, res) => {
   }
 });
 
-// @route   PUT api/education/profile_id/edu_id
+// @route   PUT api/education/edu_id
 // @desc    Delete an education by edu_id
 // @access  Private
-router.put("/education/:id/:edu_id", auth, async (req, res) => {
-  const { id, edu_id } = req.params;
+router.put("/education/:edu_id", auth, async (req, res) => {
+  const { edu_id } = req.params;
 
   try {
-    let profile = await ProfileModel.findOne({ _id: id, user: req.user._id });
+    let profile = await ProfileModel.findOne({ user: req.user._id });
     if (!profile) return res.status(404).send("Profile not found");
 
     profile.education = profile.education.filter(
@@ -231,15 +216,15 @@ router.put("/education/:id/:edu_id", auth, async (req, res) => {
   }
 });
 
-// @route   PUT api/skills/profile_id/skill_id
-// @desc    Delete a skill by edu_id
+// @route   PUT api/skills/skill_id
+// @desc    Delete a skill by skill_id
 // @access  Private
 
-router.put("/skills/:id/:skill_id", auth, async (req, res) => {
-  const { id, skill_id } = req.params;
+router.put("/skills/:skill_id", auth, async (req, res) => {
+  const { skill_id } = req.params;
 
   try {
-    let profile = await ProfileModel.findOne({ _id: id, user: req.user._id });
+    let profile = await ProfileModel.findOne({ user: req.user._id });
     if (!profile) return res.status(404).send("Profile not found");
 
     profile.skills = profile.skills.filter(
