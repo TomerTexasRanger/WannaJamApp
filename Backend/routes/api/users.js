@@ -35,6 +35,20 @@ router.post("/", async (req, res) => {
 router.get("/me", auth, async (req, res) => {
   try {
     const user = await UserModel.findById(req.user._id).select("-password");
+
+    res.send(user);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route   DELETE api/users/me
+// @desc    Delete a user (token required)
+// @access  Private
+router.delete("/me", auth, async (req, res) => {
+  try {
+    const user = await UserModel.remove({ _id: req.user._id });
     res.send(user);
   } catch (err) {
     console.log(err.message);

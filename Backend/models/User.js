@@ -24,10 +24,13 @@ const userSchema = new mongoose.Schema({
     maxlength: 1024,
   },
   createdAt: { type: Date, default: Date.now },
+  profiles: Array,
 });
-
+//TO DO change experation on token
 userSchema.methods.generateAuthToken = function () {
-  const token = jwt.sign({ _id: this._id }, jwtKey["JWT-KEY"]);
+  const token = jwt.sign({ _id: this._id }, jwtKey["JWT-KEY"], {
+    expiresIn: 360000,
+  });
   return token;
 };
 
@@ -42,5 +45,14 @@ const validateUser = (user) => {
   return schema.validate(user);
 };
 
+function validateProfiles(data) {
+  const schema = Joi.object({
+    cards: Joi.array().min(1).required(),
+  });
+
+  return schema.validate(data);
+}
+
 exports.UserModel = UserModel;
 exports.validate = validateUser;
+exports.validateProfiles = validateProfiles;
