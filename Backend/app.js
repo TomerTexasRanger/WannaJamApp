@@ -2,13 +2,14 @@ const express = require("express");
 const app = express();
 const http = require("http").Server(app);
 const connectDB = require("./config/db");
+const cors = require("cors");
 //Routes
 const users = require("./routes/api/users");
 const auth = require("./routes/api/auth");
 const profile = require("./routes/api/profile");
 const posts = require("./routes/api/posts");
 connectDB();
-
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/users", users);

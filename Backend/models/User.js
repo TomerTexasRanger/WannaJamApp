@@ -45,14 +45,14 @@ const validateUser = (user) => {
   return schema.validate(user);
 };
 
-function validateProfiles(data) {
-  const schema = Joi.object({
-    cards: Joi.array().min(1).required(),
-  });
+// function validateProfiles(data) {
+//   const schema = Joi.object({
+//     profiles: Joi.array().min(1).required(),
+//   });
 
-  return schema.validate(data);
-}
+//   return schema.validate(data);
+// }
 
 exports.UserModel = UserModel;
 exports.validate = validateUser;
-exports.validateProfiles = validateProfiles;
+// exports.validateProfiles = validateProfiles;
