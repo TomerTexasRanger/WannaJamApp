@@ -2,8 +2,9 @@ import React from "react";
 import PageHeader from "./layout/PageHeader";
 import Joi from "joi-browser";
 import Form from "./common/Form";
-import login from "../services/userService";
-
+import { connect } from "react-redux";
+import { login } from "../actions/authActions";
+import { getCurrentUser } from "../actions/userActions";
 class Signin extends Form {
   state = {
     data: { email: "", password: "" },
@@ -17,14 +18,14 @@ class Signin extends Form {
 
   doSubmit = async () => {
     const { email, password } = this.state.data;
-    try {
-      await login(email, password);
-      window.location = "/";
-    } catch (ex) {
-      if (ex.response && ex.response.status === 400) {
-        this.setState({ errors: { email: ex.response.data } });
-      }
-    }
+
+    const res = await this.props.login(email, password);
+
+    res
+      ? this.props.history.replace("/")
+      : this.setState({ data: { password: "" } });
+
+    //(window.location = "/")
   };
 
   render() {
@@ -50,4 +51,4 @@ class Signin extends Form {
   }
 }
 
-export default Signin;
+export default connect(null, { login })(Signin);

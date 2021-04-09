@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logout } from "../../actions/authActions";
 
-const NavBar = () => {
+const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light shadow-sm">
       <div className="container-fluid">
@@ -27,16 +29,38 @@ const NavBar = () => {
             </li>
           </ul>
           <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/signin">
-                Signin
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/signup">
-                Signup
-              </Link>
-            </li>
+            {!isAuthenticated && !loading && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/signin">
+                  Signin
+                </Link>
+              </li>
+            )}
+
+            {!isAuthenticated && !loading && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/signup">
+                  Signup
+                </Link>
+              </li>
+            )}
+
+            {isAuthenticated && !loading && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/">
+                  <i className="fas fa-user mr-2"></i>
+                  {user.name}
+                </Link>
+              </li>
+            )}
+
+            {isAuthenticated && !loading && (
+              <li className="nav-item">
+                <Link onClick={logout} className="nav-link" to="/signin">
+                  Logout
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>
@@ -44,4 +68,9 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+const mapStateToProps = (state) => ({
+  // user: state.usersReducer,
+  auth: state.authReducer,
+});
+
+export default connect(mapStateToProps, { logout })(NavBar);

@@ -1,9 +1,8 @@
 import PageHeader from "./layout/PageHeader";
 import Joi from "joi-browser";
 import Form from "./common/Form";
-import axios from "axios";
-import { toast } from "react-toastify";
-
+import { connect } from "react-redux";
+import { register } from "../actions/authActions";
 class Signup extends Form {
   state = {
     data: { email: "", password: "", name: "" },
@@ -19,16 +18,9 @@ class Signup extends Form {
   doSubmit = async () => {
     const { data } = this.state;
 
-    try {
-      await axios.post(`/api/users`, data);
-      toast("User Registered Successfully!");
-      this.props.history.replace("/signin");
-    } catch (ex) {
-      console.log(ex.response);
-      if (ex.response && ex.response.status === 400) {
-        this.setState({ errors: { email: "Email is taken" } });
-      }
-    }
+    const res = await this.props.register(data);
+
+    res && this.props.history.replace("/signin");
   };
   render() {
     return (
@@ -54,4 +46,4 @@ class Signup extends Form {
   }
 }
 
-export default Signup;
+export default connect(null, { register })(Signup);
