@@ -10,12 +10,20 @@ import Signup from "./components/Signup";
 import Signin from "./components/Signin";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Dashboard from "./components/profiles/profile/Dashboard";
+import ProtectedRoute from "./components/common/ProtectedRoute";
+import CreateProfile from "./components/profiles/profile-forms/CreateProfile";
+import EditProfile from "./components/profiles/profile-forms/EditProfile";
+import AddSkills from "./components/profiles/profile-forms/AddSkills";
+import Profiles from "./components/profiles/profiles/Profiles";
 
 //redux
 import { Provider } from "react-redux";
 import store from "./store";
 import { getCurrentUser } from "./actions/authActions";
 import setAuthToken from "./services/httpServices";
+import AddEducation from "./components/profiles/profile-forms/AddEducation";
+import Profile from "./components/profiles/profile/Profile";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -39,6 +47,13 @@ function App() {
             <Route path="/about" component={About} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/" component={Wanted} />
+            <ProtectedRoute path="/dashboard" component={Dashboard} />
+            <ProtectedRoute path="/create-profile" component={CreateProfile} />
+            <ProtectedRoute path="/edit-profile" component={EditProfile} />
+            <ProtectedRoute path="/add-skills" component={AddSkills} />
+            <ProtectedRoute path="/add-education" component={AddEducation} />
+            <ProtectedRoute path="/profiles" component={Profiles} />
+            <ProtectedRoute path="/profile/:id" component={Profile} />
           </Switch>
         </main>
         <footer>

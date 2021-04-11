@@ -89,7 +89,7 @@ const validateProfile = (profile) => {
   const schema = Joi.object({
     userName: Joi.string().min(2).max(50).required(),
     location: Joi.string().min(2).max(200).required(),
-    image: Joi.string().max(1024),
+    image: Joi.string().max(1024).allow(""),
     phone: Joi.string()
       .min(9)
       .max(10)
@@ -101,8 +101,8 @@ const validateProfile = (profile) => {
         stars: Joi.number().min(1).max(5).required(),
       })
     ),
-    bio: Joi.string().min(1).max(400),
-    experience: Joi.string().min(1).max(400),
+    bio: Joi.string().min(1).max(400).allow(""),
+    experience: Joi.string().min(1).max(400).allow(""),
     education: Joi.array().items(
       Joi.object({
         school: Joi.string().required(),

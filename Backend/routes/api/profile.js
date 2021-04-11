@@ -57,14 +57,13 @@ router.get("/me", auth, async (req, res) => {
 // @desc    Update current users profile
 // @access  Private
 
-router.put("/:id", auth, async (req, res) => {
+router.put("/", auth, async (req, res) => {
   const { error } = validateProfile(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   try {
     let profile = await ProfileModel.updateOne(
       {
-        _id: req.params.id,
         user: req.user._id,
       },
       req.body
@@ -72,7 +71,6 @@ router.put("/:id", auth, async (req, res) => {
     if (!profile) return res.status(404).send("Profile not found");
 
     profile = await ProfileModel.findOne({
-      _id: req.params.id,
       user: req.user._id,
     });
     res.send(profile);

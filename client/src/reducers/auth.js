@@ -36,6 +36,7 @@ const authReducer = (state = initialState, action) => {
     case REGISTER_FAIL:
     case LOAD_USER_ERROR:
     case LOGOUT:
+    case LOGIN_FAIL:
       toast.error(payload);
       localStorage.removeItem("token");
 
@@ -54,15 +55,7 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: true,
         loading: false,
       };
-    case LOGIN_FAIL:
-      toast.error(payload.data);
-      localStorage.removeItem("token");
-      return {
-        ...state,
-        token: null,
-        isAuthenticated: false,
-        loading: false,
-      };
+
     default:
       return state;
   }

@@ -47,7 +47,15 @@ const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
 
             {isAuthenticated && !loading && (
               <li className="nav-item">
-                <Link className="nav-link" to="/">
+                <Link className="nav-link" to="/profiles">
+                  <i className="fas fa-users mr-2"></i>
+                  Profiles
+                </Link>
+              </li>
+            )}
+            {isAuthenticated && !loading && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/dashboard">
                   <i className="fas fa-user mr-2"></i>
                   {user.name}
                 </Link>

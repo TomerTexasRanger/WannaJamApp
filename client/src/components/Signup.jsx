@@ -3,6 +3,8 @@ import Joi from "joi-browser";
 import Form from "./common/Form";
 import { connect } from "react-redux";
 import { register } from "../actions/authActions";
+import { Redirect } from "react-router-dom";
+
 class Signup extends Form {
   state = {
     data: { email: "", password: "", name: "" },
@@ -23,6 +25,8 @@ class Signup extends Form {
     res && this.props.history.replace("/signin");
   };
   render() {
+    if (this.props.isAuthenticated === true) return <Redirect to="/" />;
+
     return (
       <div className="container">
         <PageHeader titleText="Signup for WannaJam" />
@@ -35,7 +39,7 @@ class Signup extends Form {
           <div className="col-lg-6">
             <form onSubmit={this.handleSubmit} autoComplete="off" method="POST">
               {this.renderInput("email", "Email", "email")}
-              {this.renderInput("password", "Password", "password")}
+              {this.renderInput("password", "Password", "", "password")}
               {this.renderInput("name", "Name")}
               {this.renderButton("Signup")}
             </form>
@@ -46,4 +50,8 @@ class Signup extends Form {
   }
 }
 
-export default connect(null, { register })(Signup);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.authReducer.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { register })(Signup);

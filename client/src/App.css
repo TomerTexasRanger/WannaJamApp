@@ -16,3 +16,20 @@
   justify-content: center;
   text-align: center;
 }
+
+/* Star Rating */
+/* .app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+} */
+
+input[name="rating"] {
+  display: none;
+}
+
+.star {
+  cursor: pointer;
+  transition: color 200ms;
+}

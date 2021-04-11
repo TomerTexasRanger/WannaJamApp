@@ -7,6 +7,7 @@ import {
   USER_LOADED,
   LOAD_USER_ERROR,
   LOGOUT,
+  CLEAR_PROFILE,
 } from "./actionTypes";
 import setAuthToken from "../services/httpServices";
 
@@ -43,7 +44,7 @@ export const login = (email, password) => async (dispatch) => {
   } catch (ex) {
     dispatch({
       type: LOGIN_FAIL,
-      payload: ex.response,
+      payload: ex.response.data,
     });
     return false;
   }
@@ -70,5 +71,6 @@ export const getCurrentUser = () => async (dispatch) => {
 
 //Log out, and clear token
 export const logout = () => async (dispatch) => {
+  dispatch({ type: CLEAR_PROFILE });
   dispatch({ type: LOGOUT });
 };
