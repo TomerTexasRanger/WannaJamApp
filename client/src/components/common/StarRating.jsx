@@ -1,9 +1,9 @@
-import { FaStar } from "react-icons/fa";
-import { useState } from "react";
-import { useEffect } from "react";
+import { FaStar } from 'react-icons/fa';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
-const StarRating = ({ starValue }) => {
-  const [rating, setRating] = useState(null);
+const StarRating = ({ starValue, starNum = null }) => {
+  const [rating, setRating] = useState(starNum);
   useEffect(() => {}, []);
   return (
     <div className="mb-4">
@@ -24,7 +24,7 @@ const StarRating = ({ starValue }) => {
             <FaStar
               size={30}
               className="star"
-              color={ratingValue <= rating ? "gold" : "grey"}
+              color={ratingValue <= rating ? 'gold' : 'grey'}
             />
           </label>
         );

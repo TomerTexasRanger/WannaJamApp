@@ -1,17 +1,30 @@
-import { connect } from "react-redux";
-const Skill = ({ skills }) => {
+import StarRating from '../../common/StarRating';
+import { FaStar } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+
+const buildStars = (stars) => {
+  let addStars = [];
+  let x = 0;
+  for (x = 0; x < stars; x++) {
+    addStars.push(x);
+  }
+  return addStars;
+};
+
+const Skill = ({ skill: { instrument, stars } }) => {
+  const starNum = buildStars(stars);
   return (
-    <div className="card w-75">
-      <div className="card-body">
-        <h5 className="card-title">Drums</h5>
-        <p className="card-text">
-          <i className="fas fa-star"></i>
-          <i className="fas fa-star"></i>
-        </p>
-        <button className="btn btn-primary">X</button>
-      </div>
-    </div>
+    <>
+      <tr>
+        <td>{instrument}</td>
+        <td>
+          {starNum.map((item, i) => (
+            <FaStar key={i} size={20} color={'gold'} />
+          ))}
+        </td>
+      </tr>
+    </>
   );
 };
 
-export default connect(null)(Skill);
+export default Skill;

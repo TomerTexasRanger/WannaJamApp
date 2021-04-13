@@ -1,9 +1,13 @@
-import { connect } from "react-redux";
-import { useEffect } from "react";
-import Loader from "react-loader-spinner";
-import { getProfileById } from "../../../actions/profilesActions";
-import { Link } from "react-router-dom";
-import PageHeader from "../../layout/PageHeader";
+import { connect } from 'react-redux';
+import { useEffect } from 'react';
+import Loader from 'react-loader-spinner';
+import { getProfileById } from '../../../actions/profilesActions';
+import { Link } from 'react-router-dom';
+import PageHeader from '../../layout/PageHeader';
+import TopLeft from './TopLeft';
+import TopRight from './TopRight';
+import Bottom from './Bottom';
+import Links from './Links';
 
 const Profile = ({
   match,
@@ -20,10 +24,18 @@ const Profile = ({
         <Loader />
       ) : (
         <div className="container">
-          <PageHeader titleText={profile.userName} />
-          <Link to="/profiles" className="btn btn-success">
-            Back to Profiles
+          <Link to="/profiles" className="btn btn-primary">
+            Back To Profiles
           </Link>
+          <PageHeader titleText={'Profile page'} />
+          <div className="profile-grid my-1">
+            <TopLeft profile={profile} />
+            <div className="profile-right bg-light p-2">
+              <TopRight profile={profile} />
+            </div>
+            <Bottom profile={profile} />
+            <Links profile={profile} />
+          </div>
         </div>
       )}
     </>

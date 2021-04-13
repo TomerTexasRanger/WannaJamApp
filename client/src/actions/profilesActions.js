@@ -1,16 +1,16 @@
-import axios from "axios";
-import { toast } from "react-toastify";
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import {
   GET_PROFILE,
   PROFILE_ERROR,
   UPDATE_PROFILE,
   GET_PROFILES,
-} from "./actionTypes";
+} from './actionTypes';
 
 //Get current users profile
 export const getCurrentProfile = () => async (dispatch) => {
   try {
-    const { data } = await axios.get("/api/profile/me");
+    const { data } = await axios.get('/api/profile/me');
     dispatch({
       type: GET_PROFILE,
       payload: data,
@@ -18,7 +18,7 @@ export const getCurrentProfile = () => async (dispatch) => {
   } catch (ex) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: ex.response.data,
+      payload: ex.response,
     });
   }
 };
@@ -26,7 +26,7 @@ export const getCurrentProfile = () => async (dispatch) => {
 //Get all profiles
 export const getAllProfiles = () => async (dispatch) => {
   try {
-    const { data } = await axios.get("/api/profile");
+    const { data } = await axios.get('/api/profile');
     dispatch({
       type: GET_PROFILES,
       payload: data,
@@ -34,7 +34,7 @@ export const getAllProfiles = () => async (dispatch) => {
   } catch (ex) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: ex.response.data,
+      payload: ex.response,
     });
   }
 };
@@ -50,7 +50,7 @@ export const getProfileByUser = (userId) => async (dispatch) => {
   } catch (ex) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: ex.response.data,
+      payload: ex.response,
     });
   }
 };
@@ -74,13 +74,13 @@ export const getProfileById = (id) => async (dispatch) => {
 //Create a profile
 export const createProfile = (formData, history) => async (dispatch) => {
   try {
-    const { data } = await axios.post("/api/profile", formData);
+    const { data } = await axios.post('/api/profile', formData);
     dispatch({
       type: GET_PROFILE,
       payload: data,
     });
-    toast.success("Profile created");
-    history.push("/dashboard");
+    toast.success('Profile created');
+    history.push('/dashboard');
   } catch (ex) {
     dispatch({
       type: PROFILE_ERROR,
@@ -91,13 +91,13 @@ export const createProfile = (formData, history) => async (dispatch) => {
 //Update a profile
 export const updateProfile = (formData, history) => async (dispatch) => {
   try {
-    const { data } = await axios.put("/api/profile", formData);
+    const { data } = await axios.put('/api/profile', formData);
     dispatch({
       type: GET_PROFILE,
       payload: data,
     });
-    toast.success("Profile Updated");
-    history.push("/dashboard");
+    toast.success('Profile Updated');
+    history.push('/dashboard');
   } catch (ex) {
     dispatch({
       type: PROFILE_ERROR,
@@ -109,13 +109,13 @@ export const updateProfile = (formData, history) => async (dispatch) => {
 //Add skills
 export const addSkill = (formData, history) => async (dispatch) => {
   try {
-    const { data } = await axios.put("/api/profile/skills", formData);
+    const { data } = await axios.put('/api/profile/skills', formData);
     dispatch({
       type: UPDATE_PROFILE,
       payload: data,
     });
-    toast("Skill Added");
-    history.push("/dashboard");
+    toast('Skill Added');
+    history.push('/dashboard');
   } catch (ex) {
     dispatch({
       type: PROFILE_ERROR,
@@ -127,13 +127,13 @@ export const addSkill = (formData, history) => async (dispatch) => {
 //Add education
 export const addEducation = (formData, history) => async (dispatch) => {
   try {
-    const { data } = await axios.put("/api/profile/education", formData);
+    const { data } = await axios.put('/api/profile/education', formData);
     dispatch({
       type: UPDATE_PROFILE,
       payload: data,
     });
-    toast("Education Added");
-    history.push("/dashboard");
+    toast('Education Added');
+    history.push('/dashboard');
   } catch (ex) {
     dispatch({
       type: PROFILE_ERROR,

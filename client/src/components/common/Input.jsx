@@ -1,9 +1,16 @@
-const Input = ({ name, label, error, icon, ...rest }) => {
+const Input = ({
+  name,
+  label,
+  error,
+  icon,
+  bootClass = 'form-control',
+  ...rest
+}) => {
   return (
     <div className="form-group">
       <i className={icon}>
         <label htmlFor={name}>{label}</label>
-        <input {...rest} name={name} id={name} className="form-control" />
+        <input {...rest} name={name} id={name} className={bootClass} />
         {error && <span className="text-danger">{error}</span>}
       </i>
     </div>

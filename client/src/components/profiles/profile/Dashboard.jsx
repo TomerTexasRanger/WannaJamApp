@@ -1,10 +1,13 @@
-import { useEffect } from "react";
-import { connect } from "react-redux";
-import { getCurrentProfile } from "../../../actions/profilesActions";
-import Loader from "react-loader-spinner";
-import { Link } from "react-router-dom";
-import PageHeader from "../../layout/PageHeader";
-import Skill from "./Skill";
+import { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getCurrentProfile } from '../../../actions/profilesActions';
+import Loader from 'react-loader-spinner';
+import { Link } from 'react-router-dom';
+import PageHeader from '../../layout/PageHeader';
+import TopLeft from './TopLeft';
+import TopRight from './TopRight';
+import Bottom from './Bottom';
+import Links from './Links';
 
 const Dashboard = ({
   getCurrentProfile,
@@ -23,7 +26,7 @@ const Dashboard = ({
     />
   ) : (
     <div className="container">
-      <PageHeader titleText={"Dashbord"} />
+      <PageHeader titleText={'Dashbord'} />
       <i className="fas fa-user"></i> Welcome {user && user.name}
       {profile !== null ? (
         <>
@@ -33,9 +36,16 @@ const Dashboard = ({
           <Link className="btn btn-secondary" to="/add-skills">
             Add skills
           </Link>
-          <Link className="btn btn-secondary ml-3" to="/add-education">
-            Add Education
-          </Link>
+
+          <div className="profile-grid my-1">
+            <TopLeft profile={profile} />
+            <div className="profile-right bg-light p-2">
+              <TopRight profile={profile} />
+            </div>
+            <Bottom profile={profile} />
+
+            <Links />
+          </div>
         </>
       ) : (
         <>
@@ -46,7 +56,7 @@ const Dashboard = ({
           <br />
           <i>
             You cannot send or recieve messages, and you cannot apply for adds
-            without a profile{" "}
+            without a profile{' '}
           </i>
         </>
       )}

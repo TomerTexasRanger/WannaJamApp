@@ -1,11 +1,11 @@
-const Joi = require("@hapi/joi");
-const { max } = require("lodash");
-const mongoose = require("mongoose");
+const Joi = require('@hapi/joi');
+const { max } = require('lodash');
+const mongoose = require('mongoose');
 
 const profileSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
+    ref: 'user',
   },
   userName: {
     type: String,
@@ -13,8 +13,18 @@ const profileSchema = new mongoose.Schema({
     maxlength: 50,
     require: true,
   },
+  email: {
+    type: String,
+    minlength: 5,
+  },
+  age: {
+    type: Number,
+  },
   location: {
     type: String,
+  },
+  licensed: {
+    type: Boolean,
   },
   phone: {
     type: String,
@@ -62,17 +72,17 @@ const profileSchema = new mongoose.Schema({
       },
     },
   ],
-  social: {
-    youtube: {
-      type: String,
-    },
-    facebook: {
-      type: String,
-    },
-    instagram: {
-      type: String,
-    },
+
+  youtube: {
+    type: String,
   },
+  facebook: {
+    type: String,
+  },
+  instagram: {
+    type: String,
+  },
+
   date: {
     type: Date,
     default: Date.now,
@@ -83,13 +93,16 @@ const profileSchema = new mongoose.Schema({
     },
   ],
 });
-const ProfileModel = mongoose.model("profile", profileSchema);
+const ProfileModel = mongoose.model('profile', profileSchema);
 
 const validateProfile = (profile) => {
   const schema = Joi.object({
     userName: Joi.string().min(2).max(50).required(),
+    email: Joi.string().min(5).max(50).allow(''),
+    age: Joi.number(),
     location: Joi.string().min(2).max(200).required(),
-    image: Joi.string().max(1024).allow(""),
+    licensed: Joi.bool().required(),
+    image: Joi.string().max(1024).allow(''),
     phone: Joi.string()
       .min(9)
       .max(10)
@@ -101,8 +114,8 @@ const validateProfile = (profile) => {
         stars: Joi.number().min(1).max(5).required(),
       })
     ),
-    bio: Joi.string().min(1).max(400).allow(""),
-    experience: Joi.string().min(1).max(400).allow(""),
+    bio: Joi.string().min(1).max(400).allow(''),
+    experience: Joi.string().min(1).max(400).allow(''),
     education: Joi.array().items(
       Joi.object({
         school: Joi.string().required(),
@@ -110,7 +123,10 @@ const validateProfile = (profile) => {
         description: Joi.string(),
       })
     ),
-    social: Joi.object(),
+    youtube: Joi.string().max(400).allow(''),
+    facebook: Joi.string().max(400).allow(''),
+    instagram: Joi.string().max(400).allow(''),
+
     links: Joi.array().items(Joi.string()),
   });
   return schema.validate(profile);

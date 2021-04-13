@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import Joi from "joi-browser";
-import Input from "./Input";
+import React, { Component } from 'react';
+import Joi from 'joi-browser';
+import Input from './Input';
 
 class Form extends Component {
   state = {
@@ -36,13 +36,15 @@ class Form extends Component {
   };
 
   handleChange = ({ currentTarget: input }) => {
+    let { type, name, value } = input;
+    value = type === 'checkbox' ? input.checked : input.value;
     const errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);
-    if (errorMessage) errors[input.name] = errorMessage;
-    else delete errors[input.name];
+    if (errorMessage) errors[name] = errorMessage;
+    else delete errors[name];
 
     const data = { ...this.state.data };
-    data[input.name] = input.value;
+    data[name] = value;
 
     this.setState({ data, errors });
   };
@@ -51,11 +53,12 @@ class Form extends Component {
     return <button className="btn btn-primary">{label}</button>;
   }
 
-  renderInput(name, label, icon, type = "text") {
+  renderInput(name, label, icon, type = 'text', bootClass) {
     const { data, errors } = this.state;
 
     return (
       <Input
+        bootClass={bootClass}
         type={type}
         name={name}
         icon={icon}
@@ -63,6 +66,7 @@ class Form extends Component {
         label={label}
         onChange={this.handleChange}
         error={errors[name]}
+        checked={this.state.data.licensed}
       />
     );
   }
