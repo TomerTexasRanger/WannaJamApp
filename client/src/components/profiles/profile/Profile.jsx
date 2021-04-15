@@ -21,7 +21,12 @@ const Profile = ({
   return (
     <>
       {profile === null || loading ? (
-        <Loader />
+        <Loader
+          type="Audio"
+          height={300}
+          width={300}
+          className="d-flex justify-content-center mt-5"
+        />
       ) : (
         <div className="container">
           <Link to="/profiles" className="btn btn-primary">

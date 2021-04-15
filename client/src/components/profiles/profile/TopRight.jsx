@@ -13,7 +13,7 @@ const TopRight = ({ profile: { userName, age, location, bio, skills } }) => {
       <div className="skills">
         <h2 className="text-primary">Skills</h2>
 
-        <table className="table">
+        <table className="table table-borderless">
           <tbody>
             {skills.map((skill) => {
               return <Skill key={skill._id} skill={skill} />;
@@ -24,7 +24,7 @@ const TopRight = ({ profile: { userName, age, location, bio, skills } }) => {
           Add skills
         </Link>
       </div>
-      <div className="bio">
+      <div className="bio text-break">
         <h2 className="text-primary">BIO</h2>
         <p>{bio}</p>
       </div>

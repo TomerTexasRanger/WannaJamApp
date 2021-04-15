@@ -6,6 +6,7 @@ const {
   validateProfile,
   validateEducation,
   validateSkills,
+  validateLinks,
 } = require('../../models/Profile');
 const auth = require('../../middleware/auth');
 const { UserModel } = require('../../models/User');
@@ -170,7 +171,7 @@ router.put('/education', auth, async (req, res) => {
   }
 });
 
-// @route   PUT api/skills
+// @route   PUT api/profile/skills
 // @desc    Add to "skills" array
 // @access  Private
 
@@ -193,7 +194,30 @@ router.put('/skills', auth, async (req, res) => {
   }
 });
 
-// @route   PUT api/education/edu_id
+// @route   PUT api/profile/links
+// @desc    Add to "links" array
+// @access  Private
+
+router.put('/links', auth, async (req, res) => {
+  const { error } = validateLinks(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  try {
+    let profile = await ProfileModel.findOne({
+      user: req.user._id,
+    });
+    if (!profile) return res.status(404).send('Profile not found');
+
+    profile.links.unshift(req.body);
+    await profile.save();
+    res.json(profile);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error, please try again later');
+  }
+});
+
+// @route   PUT api/profile/education/edu_id
 // @desc    Delete an education by edu_id
 // @access  Private
 router.put('/education/:edu_id', auth, async (req, res) => {
@@ -214,7 +238,7 @@ router.put('/education/:edu_id', auth, async (req, res) => {
   }
 });
 
-// @route   PUT api/skills/skill_id
+// @route   PUT api/profile/skills/skill_id
 // @desc    Delete a skill by skill_id
 // @access  Private
 

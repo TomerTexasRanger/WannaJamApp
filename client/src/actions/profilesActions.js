@@ -141,3 +141,21 @@ export const addEducation = (formData, history) => async (dispatch) => {
     });
   }
 };
+
+//Add links
+export const addLink = (formData, history) => async (dispatch) => {
+  try {
+    const { data } = await axios.put('/api/profile/links', formData);
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: data,
+    });
+    toast('Link Added');
+    history.push('/dashboard');
+  } catch (ex) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: ex.response,
+    });
+  }
+};

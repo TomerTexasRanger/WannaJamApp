@@ -27,15 +27,15 @@ const Dashboard = ({
   ) : (
     <div className="container">
       <PageHeader titleText={'Dashbord'} />
-      <i className="fas fa-user"></i> Welcome {user && user.name}
+      <i className="fas fa-user"></i>
+      <h3 className=""> Welcome {user && user.name}</h3>
       {profile !== null ? (
         <>
-          <Link className="btn btn-success mr-3" to="/edit-profile">
-            Edit Profile
-          </Link>
-          <Link className="btn btn-secondary" to="/add-skills">
-            Add skills
-          </Link>
+          <div className="d-flex justify-content-end">
+            <Link className="btn btn-success mr-0 " to="/edit-profile">
+              Edit Profile
+            </Link>
+          </div>
 
           <div className="profile-grid my-1">
             <TopLeft profile={profile} />
@@ -44,7 +44,7 @@ const Dashboard = ({
             </div>
             <Bottom profile={profile} />
 
-            <Links />
+            <Links profile={profile} />
           </div>
         </>
       ) : (

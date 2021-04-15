@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { logout } from "../../actions/authActions";
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logout } from '../../actions/authActions';
 
 const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   return (
@@ -45,6 +45,14 @@ const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
               </li>
             )}
 
+            {isAuthenticated && !loading && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/posts">
+                  <i className="fas fa-handshake mr-2"></i>
+                  Classifieds
+                </Link>
+              </li>
+            )}
             {isAuthenticated && !loading && (
               <li className="nav-item">
                 <Link className="nav-link" to="/profiles">

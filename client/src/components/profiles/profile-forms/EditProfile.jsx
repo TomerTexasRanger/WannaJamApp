@@ -19,11 +19,10 @@ class EditProfile extends Form {
       phone: '',
       image: '',
       experience: '',
-      social: {
-        youtube: '',
-        facebook: '',
-        instagram: '',
-      },
+
+      youtube: '',
+      facebook: '',
+      instagram: '',
     },
 
     errors: {},
@@ -62,7 +61,6 @@ class EditProfile extends Form {
       .regex(/^0[2-9]\d{7,8}$/),
     image: Joi.string().min(11).max(1024).uri().allow(''),
     experience: Joi.string().min(1).max(400).allow(''),
-    social: Joi.object(),
     youtube: Joi.string().max(400).allow(''),
     facebook: Joi.string().max(400).allow(''),
     instagram: Joi.string().max(400).allow(''),
@@ -102,7 +100,7 @@ class EditProfile extends Form {
               {this.renderInput('youtube', 'YouTube', 'fab fa-youtube')}
               {this.renderInput('facebook', 'Facebook', 'fab fa-facebook')}
               {this.renderInput('instagram', 'Instagram', 'fab fa-instagram')}
-              {this.renderButton('Create Profile')}
+              {this.renderButton('Update Profile')}
             </form>
           </div>
         </div>

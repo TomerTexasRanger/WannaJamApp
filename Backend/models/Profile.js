@@ -89,7 +89,8 @@ const profileSchema = new mongoose.Schema({
   },
   links: [
     {
-      type: String,
+      title: { type: String },
+      link: { type: String },
     },
   ],
 });
@@ -149,7 +150,16 @@ const validateSkills = (skill) => {
   return schema.validate(skill);
 };
 
+const validateLinks = (link) => {
+  const schema = Joi.object({
+    title: Joi.string().min(2).max(50).required(),
+    link: Joi.string().min(10).max(1024),
+  });
+  return schema.validate(link);
+};
+
 exports.ProfileModel = ProfileModel;
 exports.validateProfile = validateProfile;
 exports.validateEducation = validateEducation;
 exports.validateSkills = validateSkills;
+exports.validateLinks = validateLinks;
