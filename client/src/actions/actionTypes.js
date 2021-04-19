@@ -16,3 +16,4 @@ export const POST_ERROR = 'POST_ERROR';
 export const UPDATE_APPLY = 'UPDATE_APPLY';
 export const DELETE_POST = 'DELETE_POST';
 export const ADD_POST = 'ADD_POST';
+export const FILTER_PROFILES = 'FILTER_PROFILES';

@@ -10,6 +10,7 @@ const {
 } = require('../../models/Profile');
 const auth = require('../../middleware/auth');
 const { UserModel } = require('../../models/User');
+const upload = require('../../middleware/multer');
 
 // @route   POST api/profile
 // @desc    Create a profile
@@ -252,6 +253,30 @@ router.put('/skills/:skill_id', auth, async (req, res) => {
     profile.skills = profile.skills.filter(
       (skill) => skill._id.toString() !== skill_id
     );
+    await profile.save();
+    res.json(profile);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error, please try again later');
+  }
+});
+
+// @route   PUT api/profile/image
+// @desc    Add a profile image
+// @access  Private
+
+router.post('/image', auth, upload.single('image'), async (req, res) => {
+  // const { error } = validateLinks(req.body);
+  // if (error) return res.status(400).send(error.details[0].message);
+  console.log(req.file.filename);
+
+  try {
+    let profile = await ProfileModel.findOne({
+      user: req.user._id,
+    });
+    if (!profile) return res.status(404).send('Profile not found');
+
+    profile.image = req.file.filename;
     await profile.save();
     res.json(profile);
   } catch (err) {

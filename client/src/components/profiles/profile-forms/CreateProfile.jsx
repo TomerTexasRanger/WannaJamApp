@@ -4,6 +4,8 @@ import Form from '../../common/Form';
 import { createProfile } from '../../../actions/profilesActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import DatePicker from 'react-datepicker';
+import { useState } from 'react';
 
 class CreateProfile extends Form {
   state = {
@@ -12,6 +14,7 @@ class CreateProfile extends Form {
       email: '',
       bio: '',
       location: '',
+      region: '',
       phone: '',
       licensed: false,
       age: '',
@@ -25,14 +28,14 @@ class CreateProfile extends Form {
 
     errors: {},
   };
-
   schema = {
     userName: Joi.string().min(2).max(50).required(),
     email: Joi.string().min(5).email().allow(''),
     bio: Joi.string().max(400).allow(''),
     licensed: Joi.bool().required(),
-    age: Joi.number().allow(''),
+    age: Joi.date().allow(''),
     location: Joi.string().min(2).max(200).required(),
+    region: Joi.string(),
     phone: Joi.string()
       .min(9)
       .max(10)
@@ -47,11 +50,19 @@ class CreateProfile extends Form {
 
   doSubmit = async () => {
     const { data } = this.state;
-
+    let birth = Date.parse(data.age);
+    let now = Date.now();
+    let theAge = now - birth;
+    let hour = 3600000;
+    let day = hour * 24;
+    let year = day * 365;
+    theAge = Math.round(theAge / year);
+    data.age = theAge;
     this.props.createProfile(data, this.props.history);
   };
 
   render() {
+    console.log(this.state.data);
     return (
       <div className="container">
         <PageHeader titleText="Create Your Profile:" />
@@ -70,17 +81,23 @@ class CreateProfile extends Form {
             >
               {this.renderInput('userName', '* User Name:')}
               {this.renderInput('email', 'Email:')}
-              {this.renderInput('age', 'User Age:', '', 'number')}
+              {this.renderInput('age', 'Date of birth:', '', 'date')}
               {this.renderInput('bio', 'Bio:')}
               {this.renderInput('location', '* Location:')}
+              <label htmlFor="region">Region: </label>
+              <select
+                name="region"
+                id="region"
+                className="ml-2"
+                value={this.state.data.region}
+                onChange={this.handleChange}
+              >
+                <option value="north">North</option>
+                <option value="center">Center</option>
+                <option value="south">South</option>
+                <option value="other">Other</option>
+              </select>
               {this.renderInput('phone', '* Phone:')}
-              {this.renderInput(
-                'image',
-                'Image:',
-                '',
-                'file',
-                'form-control-file'
-              )}
               {this.renderInput('experience', 'Experience:')}
               {this.renderInput(
                 'licensed',

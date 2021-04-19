@@ -6,15 +6,6 @@
   min-height: 100vh;
 } */
 
-input[name='rating'] {
-  display: none;
-}
-
-.star {
-  cursor: pointer;
-  transition: color 200ms;
-}
-
 .m-1 {
   margin: 1rem;
 }
@@ -399,6 +390,14 @@ img {
   padding: 1rem;
   margin-bottom: 1rem;
   text-align: center;
+  max-height: 30rem;
+}
+.profileItem-image {
+  max-height: 40%;
+  overflow-y: hidden;
+}
+.profileItem-image img {
+  /* max-height: 100%; */
 }
 .profiles .profile .profiles-skills {
   display: -webkit-box;
@@ -453,7 +452,8 @@ img {
   text-align: center;
 }
 .profile-grid .profile-left img {
-  width: 20rem;
+  max-width: 20rem;
+  height: 50%;
 }
 .profile-grid .profile-left .icons a {
   color: #fff;
@@ -524,7 +524,7 @@ img {
   border-bottom: 1px dotted #ccc;
 }
 .profile-grid .profile-edu:last-child {
-  /* border: none; */
+  border: none;
 }
 .profile-grid .profile-edu p {
   margin: 0.5em 0;

@@ -11,23 +11,21 @@ import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 
 const Post = ({
+  match,
   getPost,
   auth,
-  post: {
-    post: { headline, text, image, userName, date, _id, user },
-    loading,
-  },
+  post: { post, loading },
   applyToPost,
   unapplyToPost,
   deletePost,
-  match,
 }) => {
-  const [didApply, setDidApply] = useState(false);
-
   useEffect(() => {
     getPost(match.params.id);
   }, []);
-  return loading ? (
+  const [didApply, setDidApply] = useState(false);
+
+  console.log(match.params.id);
+  return loading && !post !== null ? (
     <Loader
       type="Audio"
       height={300}
@@ -37,28 +35,45 @@ const Post = ({
   ) : (
     <>
       <section className="container">
-        <Link to={`/post/${_id}`} className="btn btn-info mb-2">
+        <Link to={`/post/${post._id}`} className="btn btn-info mb-2">
           Back To Classifieds
         </Link>
         <div className="post bg-white p-1 my-1">
           <div>
             <a href="profile.html">
-              <img className="border shadow" src={image} alt={userName} />
-              <h4>{userName}</h4>
+              {!post.image ? (
+                <>
+                  {' '}
+                  <div>
+                    <h2>No Photo</h2>
+                  </div>
+                </>
+              ) : (
+                <img
+                  className="my-1"
+                  src={
+                    require(`../../../../../Backend/public/uploads/images/${
+                      post.image === '' ? '' : post.image
+                    }`).default
+                  }
+                  alt={post.userName}
+                ></img>
+              )}
+              <h4>{post.userName}</h4>
             </a>
           </div>
           <div>
             <div className="p-2">
-              <h5 className="text-break">{headline}</h5>
-              <p className="text-break">{text}</p>
+              <h5 className="text-break">{post.headline}</h5>
+              <p className="text-break">{post.text}</p>
               <p>
-                Posted on <Moment format={'DD/MM/YY'}>{date}</Moment>
+                Posted on <Moment format={'DD/MM/YY'}>{post.date}</Moment>
               </p>
             </div>
             {didApply ? (
               <button
                 onClick={() => {
-                  unapplyToPost(_id);
+                  unapplyToPost(post._id);
                   setDidApply(false);
                 }}
                 className="btn btn-secondary float-right"
@@ -68,7 +83,7 @@ const Post = ({
             ) : (
               <button
                 onClick={() => {
-                  applyToPost(_id);
+                  applyToPost(post._id);
                   setDidApply(true);
                 }}
                 className="btn btn-success float-right"
@@ -77,9 +92,9 @@ const Post = ({
               </button>
             )}
 
-            {!auth.loading && user === auth.user._id && (
+            {!auth.loading && post.user === auth.user._id && (
               <button
-                onClick={() => deletePost(_id)}
+                onClick={() => deletePost(post._id)}
                 className="btn btn-danger float-right"
               >
                 Delete

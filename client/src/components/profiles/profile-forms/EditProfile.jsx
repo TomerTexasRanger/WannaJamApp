@@ -35,6 +35,7 @@ class EditProfile extends Form {
         userName: loading || !profile.userName ? '' : profile.userName,
         bio: loading || !profile.bio ? '' : profile.bio,
         location: loading || !profile.location ? '' : profile.location,
+        region: loading ? '' : profile.region,
         age: loading || !profile.age ? '' : profile.age,
         licensed: !loading && profile.licensed,
         phone: loading || !profile.phone ? '' : profile.phone,
@@ -54,12 +55,14 @@ class EditProfile extends Form {
     licensed: Joi.bool().required(),
     age: Joi.number().allow(''),
     location: Joi.string().min(2).max(200).required(),
+    region: Joi.string(),
+
     phone: Joi.string()
       .min(9)
       .max(10)
       .required()
       .regex(/^0[2-9]\d{7,8}$/),
-    image: Joi.string().min(11).max(1024).uri().allow(''),
+    image: Joi.string().min(11).max(1024).allow(''),
     experience: Joi.string().min(1).max(400).allow(''),
     youtube: Joi.string().max(400).allow(''),
     facebook: Joi.string().max(400).allow(''),
@@ -68,6 +71,15 @@ class EditProfile extends Form {
 
   doSubmit = async () => {
     const { data } = this.state;
+    let birth = Date.parse(data.age);
+    let now = Date.now();
+    let theAge = now - birth;
+    let hour = 3600000;
+    let day = hour * 24;
+    let year = day * 365;
+    theAge = Math.round(theAge / year);
+    data.age = theAge;
+
     this.props.updateProfile(data, this.props.history);
   };
 
@@ -84,11 +96,23 @@ class EditProfile extends Form {
           <div className="col-lg-6">
             <form onSubmit={this.handleSubmit} autoComplete="off" method="POST">
               {this.renderInput('userName', '* User Name:')}
-              {this.renderInput('age', 'User Age:', '', 'number')}
+              {this.renderInput('age', 'User Age:', '', 'date')}
               {this.renderInput('bio', 'Bio:')}
               {this.renderInput('location', '* Location:')}
+              <label htmlFor="region">Region: </label>
+              <select
+                name="region"
+                id="region"
+                className="ml-2"
+                value={this.state.data.region}
+                onChange={this.handleChange}
+              >
+                <option value="north">North</option>
+                <option value="center">Center</option>
+                <option value="south">South</option>
+                <option value="other">Other</option>
+              </select>
               {this.renderInput('phone', '* Phone:')}
-              {this.renderInput('image', 'Image:')}
               {this.renderInput('experience', 'Experience:')}
               {this.renderInput(
                 'licensed',

@@ -2,4 +2,20 @@
 
 # Be cool dude, were still making good time, and you learned some things.
 
-# Do the "addLink" schema
+<!-- # Do the "addLink" schema  -->
+
+# Figure out how to make a responsive dropdown navbar for the filter
+
+# Add the genre selector to the profile
+
+# Display the list of applyed Adds in the profile. and how many users applied to your app
+
+# inc the uploadimage componenent into the profile
+
+# make delete buttons for skills and education
+
+# make a filter for posts
+
+# figure out how to make the profile images with different resolution fit
+
+# make the filter component reusable

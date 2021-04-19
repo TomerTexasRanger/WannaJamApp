@@ -21,7 +21,14 @@ const PostItem = ({
       <div className="post bg-white p-1 my-1">
         <div>
           <a href="profile.html">
-            <img className="border shadow" src={image} alt={userName} />
+            <img
+              className="border shadow"
+              src={
+                require(`../../../../Backend/public/uploads/images/${image}`)
+                  .default
+              }
+              alt={userName}
+            />
             <h4>{userName}</h4>
           </a>
         </div>

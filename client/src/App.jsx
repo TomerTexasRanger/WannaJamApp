@@ -18,6 +18,7 @@ import AddSkills from './components/profiles/profile-forms/AddSkills';
 import Profiles from './components/profiles/profiles/Profiles';
 import Posts from './components/posts/Posts';
 import Post from './components/posts/post/Post';
+import AddImage from './components/profiles/profile-forms/AddImage';
 
 //redux
 import { Provider } from 'react-redux';
@@ -55,6 +56,7 @@ function App() {
             <ProtectedRoute path="/edit-profile" component={EditProfile} />
             <ProtectedRoute path="/add-skills" component={AddSkills} />
             <ProtectedRoute path="/add-link" component={AddLink} />
+            <ProtectedRoute path="/add-image" component={AddImage} />
             <ProtectedRoute path="/add-education" component={AddEducation} />
             <ProtectedRoute path="/profiles" component={Profiles} />
             <ProtectedRoute path="/profile/:id" component={Profile} />

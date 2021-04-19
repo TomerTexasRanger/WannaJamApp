@@ -1,16 +1,16 @@
-import PageHeader from "../../layout/PageHeader";
-import Joi from "joi-browser";
-import Form from "../../common/Form";
-import { addSkill } from "../../../actions/profilesActions";
-import { connect } from "react-redux";
-import { withRouter } from "react-router";
-import StarRating from "../../common/StarRating";
+import PageHeader from '../../layout/PageHeader';
+import Joi from 'joi-browser';
+import Form from '../../common/Form';
+import { addSkill } from '../../../actions/profilesActions';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import StarRating from '../../common/StarRating';
 
 class AddSkills extends Form {
   state = {
     data: {
-      instrument: "",
-      stars: "",
+      instrument: '',
+      stars: '',
     },
 
     errors: {},
@@ -43,10 +43,28 @@ class AddSkills extends Form {
         <div className="row">
           <div className="col-lg-6">
             <form onSubmit={this.handleSubmit} autoComplete="off" method="POST">
-              {this.renderInput("instrument", "* Instrument:")}
+              <select
+                className="form-control"
+                name="instrument"
+                id="instrument"
+                value={this.state.data.instrument}
+                onChange={this.handleChange}
+              >
+                <option value="Guitar">Guitar</option>
+                <option value="Drums">Drums</option>
+                <option value="Piano">Piano</option>
+                <option value="Vocals">Vocals</option>
+                <option value="Strings">Strings</option>
+                <option value="Percussion">Percussion</option>
+                <option value="Synth">Synth</option>
+                <option value="Bass">Bass</option>
+                <option value="Reeds">Reeds</option>
+                <option value="Brass">Brass</option>
+                <option value="Other">Other</option>
+              </select>
 
               <StarRating starValue={(val) => this.setStarValue(val)} />
-              {this.renderButton("Add Skill")}
+              {this.renderButton('Add Skill')}
             </form>
           </div>
         </div>

@@ -94,6 +94,7 @@ export const addPost = (formData, history) => async (dispatch) => {
 
 //Get Post
 export const getPost = (id) => async (dispatch) => {
+  console.log('getPost!');
   try {
     const { data } = await axios.get(`/api/posts/${id}`);
     dispatch({

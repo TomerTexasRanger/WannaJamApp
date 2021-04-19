@@ -31,6 +31,7 @@ export const getAllProfiles = () => async (dispatch) => {
       type: GET_PROFILES,
       payload: data,
     });
+    return data;
   } catch (ex) {
     dispatch({
       type: PROFILE_ERROR,
@@ -80,11 +81,11 @@ export const createProfile = (formData, history) => async (dispatch) => {
       payload: data,
     });
     toast.success('Profile created');
-    history.push('/dashboard');
+    window.location = '/dashboard';
   } catch (ex) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: ex.response.data,
+      payload: ex.response,
     });
   }
 };
@@ -152,6 +153,24 @@ export const addLink = (formData, history) => async (dispatch) => {
     });
     toast('Link Added');
     history.push('/dashboard');
+  } catch (ex) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: ex.response,
+    });
+  }
+};
+
+//Add image
+export const addImage = (formData, history) => async (dispatch) => {
+  try {
+    const { data } = await axios.post('/api/profile/image', formData);
+    await dispatch({
+      type: UPDATE_PROFILE,
+      payload: data,
+    });
+    // history.push('/dashboard');
+    window.location = '/dashboard';
   } catch (ex) {
     dispatch({
       type: PROFILE_ERROR,

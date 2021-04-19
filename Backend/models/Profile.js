@@ -23,6 +23,9 @@ const profileSchema = new mongoose.Schema({
   location: {
     type: String,
   },
+  region: {
+    type: String,
+  },
   licensed: {
     type: Boolean,
   },
@@ -102,6 +105,7 @@ const validateProfile = (profile) => {
     email: Joi.string().min(5).max(50).allow(''),
     age: Joi.number(),
     location: Joi.string().min(2).max(200).required(),
+    region: Joi.string().required(),
     licensed: Joi.bool().required(),
     image: Joi.string().max(1024).allow(''),
     phone: Joi.string()

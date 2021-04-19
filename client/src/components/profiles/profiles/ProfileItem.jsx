@@ -2,11 +2,23 @@ import { Link } from 'react-router-dom';
 import Skill from '../profile/Skill';
 
 const ProfileItem = ({
+  match,
   profile: { userName, location, _id, skills, image, age },
 }) => {
   return (
     <div className="profile bg-light">
-      <img className="" src={image} alt={userName}></img>
+      <div className="profileItem-image ">
+        <img
+          className=""
+          src={
+            image &&
+            require(`../../../../../Backend/public/uploads/images/${image}`)
+              .default
+          }
+          alt={userName}
+        ></img>
+      </div>
+
       <div>
         <h2>
           {userName} {age}
@@ -14,24 +26,24 @@ const ProfileItem = ({
         <p>{location}</p>
       </div>
       <div></div>
-      <div className="line"></div>
+      <div className="line mt-0"></div>
       <div className="profiles-skills">
         <table className=" ">
           <tbody>
-            {skills.map((skill) => {
+            {skills.slice(0, 3).map((skill) => {
               return <Skill key={skill._id} skill={skill} />;
             })}
           </tbody>
         </table>
       </div>
-      <ul className="profiles-genres">
+      <ul className="profiles-genres mt-auto">
         <li>* jazz</li>
         <li>* rock</li>
         <li>* rap</li>
       </ul>
-      <a className="btn btn-primary" href="profile.html">
+      <Link className="btn btn-primary mt-auto" to={`/profile/${_id}`}>
         Profile
-      </a>
+      </Link>
     </div>
   );
 };

@@ -14,7 +14,28 @@ const TopLeft = ({
 }) => {
   return (
     <div className="profile-left bg-primary p-2">
-      <img className="my-1" src={image} alt={userName}></img>
+      <Link className="btn btn-success" to="/add-image">
+        Upload Image
+      </Link>
+      {!image ? (
+        <>
+          {' '}
+          <div>
+            <h2>No Photo</h2>
+          </div>
+        </>
+      ) : (
+        <img
+          className="my-1"
+          src={
+            require(`../../../../../Backend/public/uploads/images/${
+              image === '' ? '' : image
+            }`).default
+          }
+          alt={userName}
+        ></img>
+      )}
+
       <h3>
         <strong>Phone:</strong> {phone}
       </h3>
