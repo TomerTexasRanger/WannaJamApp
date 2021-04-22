@@ -11,17 +11,34 @@ const buildStars = (stars) => {
   return addStars;
 };
 
-const Skill = ({ skill: { instrument, stars } }) => {
-  const starNum = buildStars(stars);
+const Skill = ({ removeSkill, skill, _id = null, user = null }) => {
+  const starNum = buildStars(skill.stars);
+  console.log(_id, user);
   return (
     <>
       <tr>
-        <td>{instrument}</td>
+        <td>{skill.instrument}</td>
         <td>
           {starNum.map((item, i) => (
             <FaStar key={i} size={20} color={'gold'} />
           ))}
         </td>
+        {_id && user._id && _id === user._id ? (
+          <td>
+            {' '}
+            <button
+              onClick={() => {
+                removeSkill(skill._id);
+                window.location = '/dashboard';
+              }}
+              className="btn btn-danger"
+            >
+              X
+            </button>
+          </td>
+        ) : (
+          ''
+        )}
       </tr>
     </>
   );

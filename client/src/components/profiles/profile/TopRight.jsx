@@ -1,7 +1,11 @@
 import Skill from './Skill';
 import { Link } from 'react-router-dom';
 
-const TopRight = ({ profile: { userName, age, location, bio, skills } }) => {
+const TopRight = ({
+  removeSkill,
+  profile: { userName, age, location, bio, skills, user },
+  user: { _id },
+}) => {
   return (
     <>
       <div className="top">
@@ -13,20 +17,36 @@ const TopRight = ({ profile: { userName, age, location, bio, skills } }) => {
       <div className="skills">
         <h2 className="text-primary">Skills</h2>
 
-        <table className="table table-borderless">
-          <tbody>
-            {skills.map((skill) => {
-              return <Skill key={skill._id} skill={skill} />;
-            })}
-          </tbody>
-        </table>
-        <Link className="btn btn-secondary float-right" to="/add-skills">
-          Add skills
-        </Link>
+        {skills.length > 0 ? (
+          <table className="table table-borderless">
+            <tbody>
+              {skills.map((skill) => {
+                return (
+                  <Skill
+                    key={skill._id}
+                    skill={skill}
+                    _id={_id}
+                    user={user}
+                    removeSkill={removeSkill}
+                  />
+                );
+              })}
+            </tbody>
+          </table>
+        ) : (
+          <h5 className="text-center">No Skills Yet</h5>
+        )}
+        {_id === user._id ? (
+          <Link className="btn btn-secondary float-right" to="/add-skills">
+            Add skills
+          </Link>
+        ) : (
+          ''
+        )}
       </div>
       <div className="bio text-break">
         <h2 className="text-primary">BIO</h2>
-        <p>{bio}</p>
+        <p>{bio ? bio : <h5>No Bio Yet...</h5>}</p>
       </div>
     </>
   );

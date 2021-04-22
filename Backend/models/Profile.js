@@ -23,6 +23,13 @@ const profileSchema = new mongoose.Schema({
   location: {
     type: String,
   },
+  genres: [
+    {
+      genre: {
+        type: String,
+      },
+    },
+  ],
   region: {
     type: String,
   },
@@ -96,6 +103,12 @@ const profileSchema = new mongoose.Schema({
       link: { type: String },
     },
   ],
+  applied: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'post',
+    },
+  ],
 });
 const ProfileModel = mongoose.model('profile', profileSchema);
 
@@ -106,6 +119,7 @@ const validateProfile = (profile) => {
     age: Joi.number(),
     location: Joi.string().min(2).max(200).required(),
     region: Joi.string().required(),
+    genre: Joi.string(),
     licensed: Joi.bool().required(),
     image: Joi.string().max(1024).allow(''),
     phone: Joi.string()
@@ -162,8 +176,16 @@ const validateLinks = (link) => {
   return schema.validate(link);
 };
 
+const validateGenres = (genre) => {
+  const schema = Joi.object({
+    genre: Joi.string().min(2).max(50),
+  });
+  return schema.validate(genre);
+};
+
 exports.ProfileModel = ProfileModel;
 exports.validateProfile = validateProfile;
 exports.validateEducation = validateEducation;
 exports.validateSkills = validateSkills;
 exports.validateLinks = validateLinks;
+exports.validateGenres = validateGenres;

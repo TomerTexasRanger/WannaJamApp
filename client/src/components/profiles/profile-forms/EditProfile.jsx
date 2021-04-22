@@ -4,6 +4,7 @@ import Form from '../../common/Form';
 import {
   updateProfile,
   getCurrentProfile,
+  addImage,
 } from '../../../actions/profilesActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
@@ -96,7 +97,7 @@ class EditProfile extends Form {
           <div className="col-lg-6">
             <form onSubmit={this.handleSubmit} autoComplete="off" method="POST">
               {this.renderInput('userName', '* User Name:')}
-              {this.renderInput('age', 'User Age:', '', 'date')}
+              {this.renderInput('age', 'Birth Date:', '', 'date')}
               {this.renderInput('bio', 'Bio:')}
               {this.renderInput('location', '* Location:')}
               <label htmlFor="region">Region: </label>

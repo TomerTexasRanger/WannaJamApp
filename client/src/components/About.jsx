@@ -1,4 +1,5 @@
 import PageHeader from './layout/PageHeader';
+import FilterBar from './common/FilterBar';
 
 const About = () => {
   return (
@@ -10,6 +11,7 @@ const About = () => {
             <p>Content example text for about page here.</p>
           </div>
         </div>
+        <FilterBar data />
       </div>
     </>
   );

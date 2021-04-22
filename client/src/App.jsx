@@ -28,6 +28,7 @@ import setAuthToken from './services/httpServices';
 import AddEducation from './components/profiles/profile-forms/AddEducation';
 import Profile from './components/profiles/profile/Profile';
 import AddLink from './components/profiles/profile-forms/AddLink';
+import AddGenres from './components/profiles/profile-forms/AddGenres';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -51,17 +52,18 @@ function App() {
             <Route path="/about" component={About} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/" component={Wanted} />
+            <ProtectedRoute path="/post/:id" component={Post} />
+            <ProtectedRoute path="/profile/:id" component={Profile} />
             <ProtectedRoute path="/dashboard" component={Dashboard} />
             <ProtectedRoute path="/create-profile" component={CreateProfile} />
             <ProtectedRoute path="/edit-profile" component={EditProfile} />
             <ProtectedRoute path="/add-skills" component={AddSkills} />
+            <ProtectedRoute path="/add-genres" component={AddGenres} />
             <ProtectedRoute path="/add-link" component={AddLink} />
             <ProtectedRoute path="/add-image" component={AddImage} />
             <ProtectedRoute path="/add-education" component={AddEducation} />
             <ProtectedRoute path="/profiles" component={Profiles} />
-            <ProtectedRoute path="/profile/:id" component={Profile} />
             <ProtectedRoute path="/posts" component={Posts} />
-            <ProtectedRoute path="/post/:id" component={Post} />
           </Switch>
         </main>
         <footer>

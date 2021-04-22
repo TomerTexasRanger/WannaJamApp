@@ -1,11 +1,11 @@
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 import {
   PROFILE_ERROR,
   GET_PROFILE,
   CLEAR_PROFILE,
   UPDATE_PROFILE,
   GET_PROFILES,
-} from "../actions/actionTypes";
+} from '../actions/actionTypes';
 
 const initialState = {
   profile: null,
@@ -34,6 +34,7 @@ const profilesReducer = (state = initialState, action) => {
       toast(payload);
       return {
         ...state,
+        profile: null,
         error: { payload },
         loading: false,
       };

@@ -5,27 +5,58 @@ import {
   deletePost,
   unapplyToPost,
 } from '../../../actions/postsActions';
+import {
+  getCurrentProfile,
+  getAllProfiles,
+} from '../../../actions/profilesActions';
 import { useEffect, useState } from 'react';
 import Loader from 'react-loader-spinner';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
+import Profiles from '../../profiles/profiles/Profiles';
+import ProfileItem from '../../profiles/profiles/ProfileItem';
 
 const Post = ({
+  profiles: { profiles, profile },
+  post: { post, loading },
   match,
   getPost,
   auth,
-  post: { post, loading },
+  getAllProfiles,
+  getCurrentProfile,
   applyToPost,
   unapplyToPost,
   deletePost,
 }) => {
-  useEffect(() => {
-    getPost(match.params.id);
-  }, []);
   const [didApply, setDidApply] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      await getPost(match.params.id);
+      await getCurrentProfile();
+      await getAllProfiles();
+      await setDidApply(checkIfApplied());
+    };
+    fetchData();
+  }, []);
+  console.log(post);
+  const checkIfApplied = () => {
+    if (!loading && post !== null) {
+      if (
+        post.apply.filter((app) => {
+          console.log('works');
+          return app.userProfile.toString() === profile._id.toString();
+        }).length > 0
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return true;
+    }
+  };
 
-  console.log(match.params.id);
-  return loading && !post !== null ? (
+  return loading || post === null ? (
     <Loader
       type="Audio"
       height={300}
@@ -35,12 +66,12 @@ const Post = ({
   ) : (
     <>
       <section className="container">
-        <Link to={`/post/${post._id}`} className="btn btn-info mb-2">
+        <Link to={`/posts`} className="btn btn-info mb-2">
           Back To Classifieds
         </Link>
         <div className="post bg-white p-1 my-1">
           <div>
-            <a href="profile.html">
+            <Link to={`/profile/${post.profile}`}>
               {!post.image ? (
                 <>
                   {' '}
@@ -60,7 +91,7 @@ const Post = ({
                 ></img>
               )}
               <h4>{post.userName}</h4>
-            </a>
+            </Link>
           </div>
           <div>
             <div className="p-2">
@@ -102,6 +133,21 @@ const Post = ({
             )}
           </div>
         </div>
+
+        <div className="applicants">
+          <h2 className="mt-5">Applicants:</h2>
+          <div className="line"></div>
+          <div className="profiles">
+            {post.apply &&
+              post.apply.map((app) => {
+                return profiles.map((profile) => {
+                  if (profile._id.toString() === app.userProfile.toString()) {
+                    return <ProfileItem key={profile._id} profile={profile} />;
+                  }
+                });
+              })}
+          </div>
+        </div>
       </section>
     </>
   );
@@ -111,10 +157,13 @@ const mapStateToProps = (state) => {
   return {
     post: state.postsReducer,
     auth: state.authReducer,
+    profiles: state.profilesReducer,
   };
 };
 
 export default connect(mapStateToProps, {
+  getAllProfiles,
+  getCurrentProfile,
   getPost,
   unapplyToPost,
   applyToPost,

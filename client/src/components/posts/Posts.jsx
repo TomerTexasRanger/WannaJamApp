@@ -1,13 +1,70 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getPosts } from '../../actions/postsActions';
+import {
+  filterPostsByName,
+  filterPostsByInstrument,
+  filterPostsByRegion,
+  filterPostsByFee,
+} from '../../actions/filterActions';
+import { getCurrentProfile } from '../../actions/profilesActions';
 import Loader from 'react-loader-spinner';
 import PostItem from './PostItem';
 import PostForm from './PostForm';
-const Posts = ({ getPosts, posts: { posts, loading } }) => {
+import FilterBar from '../common/FilterBar';
+const Posts = ({
+  getCurrentProfile,
+  getPosts,
+  posts: { posts, loading },
+  profile: { profile },
+}) => {
+  // const [data, setData] = useState('');
+  const [fillPosts, setFillPosts] = useState([]);
   useEffect(() => {
-    getPosts();
+    const fetchData = async () => {
+      await getCurrentProfile();
+      const res = await getPosts();
+      setFillPosts(res);
+    };
+    fetchData();
   }, []);
+
+  // const handleNameFilter = (e) => {
+  //   e.preventDefault();
+  //   const filtered = filterPostsByName(data, posts);
+  //   setFillPosts(filtered);
+  // };
+
+  const categories = [
+    {
+      title: 'fee',
+      names: ['Paid', 'Just for fun'],
+      func: filterPostsByFee,
+    },
+    {
+      title: 'region',
+      names: ['North', 'Center', 'South', 'Other'],
+      func: filterPostsByRegion,
+    },
+    {
+      title: 'instrument',
+      names: [
+        'Guitar',
+        'Drums',
+        'Piano',
+        'Vocals',
+        'Strings',
+        'Percussion',
+        'Synths',
+        'Bass',
+        'Reeds',
+        'Brass',
+        'Other',
+      ],
+      func: filterPostsByInstrument,
+    },
+  ];
+
   return loading ? (
     <Loader
       type="Audio"
@@ -24,10 +81,22 @@ const Posts = ({ getPosts, posts: { posts, loading } }) => {
           <i className="fas-fa-user"></i>Welcome to to whataddfladf
         </p>
         <PostForm />
+        <FilterBar
+          // data={data}
+          // setData={setData}
+          dataArr={posts}
+          categories={categories}
+          stateFunc={setFillPosts}
+        />
         <div className="posts">
-          {posts.map((post) => (
-            <PostItem key={post._id} post={post} />
-          ))}
+          {console.log(fillPosts)}
+          {fillPosts.length > 0 ? (
+            fillPosts.map((post) => (
+              <PostItem key={post._id} post={post} profile={profile} />
+            ))
+          ) : (
+            <h3>No results found</h3>
+          )}
         </div>
       </section>
     </>
@@ -37,7 +106,8 @@ const Posts = ({ getPosts, posts: { posts, loading } }) => {
 const mapStateToProps = (state) => {
   return {
     posts: state.postsReducer,
+    profile: state.profilesReducer,
   };
 };
 
-export default connect(mapStateToProps, { getPosts })(Posts);
+export default connect(mapStateToProps, { getPosts, getCurrentProfile })(Posts);

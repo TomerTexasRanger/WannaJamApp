@@ -17,6 +17,40 @@ export const getPosts = () => async (dispatch) => {
       type: GET_POSTS,
       payload: data,
     });
+    return data;
+  } catch (ex) {
+    dispatch({
+      type: POST_ERROR,
+      payload: ex.response,
+    });
+  }
+};
+
+//Get posts Applied to
+export const getAppliedPosts = () => async (dispatch) => {
+  console.log('works');
+  try {
+    const { data } = await axios.get(`api/posts/applied`);
+    dispatch({
+      type: GET_POSTS,
+      payload: data,
+    });
+    return data;
+  } catch (ex) {
+    dispatch({
+      type: POST_ERROR,
+      payload: ex.response,
+    });
+  }
+};
+
+//Get all users posts
+export const getMyPosts = () => async (dispatch) => {
+  console.log('works');
+  try {
+    const { data } = await axios.get(`api/posts/me`);
+
+    return data;
   } catch (ex) {
     dispatch({
       type: POST_ERROR,
@@ -26,7 +60,7 @@ export const getPosts = () => async (dispatch) => {
 };
 
 //Apply to post
-export const applyToPost = (id) => async (dispatch) => {
+export const applyToPost = (id, profile_id) => async (dispatch) => {
   try {
     const { data } = await axios.put(`/api/posts/apply/${id}`);
     dispatch({
@@ -43,6 +77,7 @@ export const applyToPost = (id) => async (dispatch) => {
 
 //Remove Apply
 export const unapplyToPost = (id) => async (dispatch) => {
+  console.log('works', id);
   try {
     const { data } = await axios.put(`/api/posts/unapply/${id}`);
     dispatch({
@@ -83,12 +118,14 @@ export const addPost = (formData, history) => async (dispatch) => {
       payload: data,
     });
     toast.success('Post Created');
-    history.push('/posts');
+    // await getPosts();
+    window.location = '/posts';
   } catch (ex) {
     dispatch({
       type: POST_ERROR,
       payload: ex.response,
     });
+    console.log(ex);
   }
 };
 

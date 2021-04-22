@@ -428,7 +428,7 @@ img {
   grid-template-columns: 1fr 2fr;
   grid-template-areas:
     'left right right'
-    'exp edu edu'
+    'exp edu gen'
     'links links links';
   row-gap: 0.5rem;
 }
@@ -453,7 +453,7 @@ img {
 }
 .profile-grid .profile-left img {
   max-width: 20rem;
-  height: 50%;
+  max-height: 50%;
 }
 .profile-grid .profile-left .icons a {
   color: #fff;
@@ -523,6 +523,16 @@ img {
   padding-bottom: 1rem;
   border-bottom: 1px dotted #ccc;
 }
+.profile-grid .profile-genre {
+  -ms-grid-row: 3;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 3;
+  grid-area: gen;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dotted #ccc;
+}
+
 .profile-grid .profile-edu:last-child {
   border: none;
 }
@@ -553,6 +563,27 @@ img {
 }
 .post img {
   width: 150px;
+}
+
+.post-manager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  text-align: center;
+  padding: 1rem;
+}
+
+.post-manager .my-posts {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  border: 1px solid #ccc;
+  padding: 1rem;
+}
+.post-manager .applied-posts {
+  grid-column: 2/-1;
+  grid-row: 1/2;
+  border: 1px solid #ccc;
+  padding: 1rem;
 }
 @media (max-width: 700px) {
   .hide-sm {
@@ -608,6 +639,7 @@ img {
       'right'
       'exp'
       'edu'
+      'gen'
       'links';
   }
   .profile-right .skills {

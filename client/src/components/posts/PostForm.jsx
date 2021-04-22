@@ -10,6 +10,8 @@ class AddPost extends Form {
     data: {
       headline: '',
       text: '',
+      region: '',
+      paid: false,
     },
 
     errors: {},
@@ -18,6 +20,8 @@ class AddPost extends Form {
   schema = {
     headline: Joi.string().min(2).max(100).required(),
     text: Joi.string().min(10).max(1024).required(),
+    region: Joi.string().min(1).max(20),
+    paid: Joi.bool().required(),
   };
 
   doSubmit = async () => {
@@ -39,7 +43,27 @@ class AddPost extends Form {
             <form onSubmit={this.handleSubmit} autoComplete="off" method="POST">
               {this.renderInput('headline', 'Headline:')}
               {this.renderInput('text', 'Text:', '')}
-
+              <label htmlFor="region">Region: </label>
+              <select
+                name="region"
+                id="region"
+                className="ml-2"
+                value={this.state.data.region}
+                onChange={this.handleChange}
+              >
+                <option value="north">Select region</option>
+                <option value="North">North</option>
+                <option value="Center">Center</option>
+                <option value="South">South</option>
+                <option value="Other">Other</option>
+              </select>
+              {this.renderInput(
+                'paid',
+                'Paid?:',
+                '',
+                'checkbox',
+                'form-check-input ml-3 '
+              )}
               {this.renderButton('Publish Add')}
             </form>
           </div>

@@ -3,7 +3,7 @@ import Skill from '../profile/Skill';
 
 const ProfileItem = ({
   match,
-  profile: { userName, location, _id, skills, image, age },
+  profile: { userName, location, _id, skills, image, age, genres },
 }) => {
   return (
     <div className="profile bg-light">
@@ -37,9 +37,9 @@ const ProfileItem = ({
         </table>
       </div>
       <ul className="profiles-genres mt-auto">
-        <li>* jazz</li>
-        <li>* rock</li>
-        <li>* rap</li>
+        {genres.slice(0, 3).map((genre) => {
+          return <li key={genre._id}>*{genre.genre}</li>;
+        })}
       </ul>
       <Link className="btn btn-primary mt-auto" to={`/profile/${_id}`}>
         Profile

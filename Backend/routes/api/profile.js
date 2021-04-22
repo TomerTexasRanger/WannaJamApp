@@ -7,6 +7,7 @@ const {
   validateEducation,
   validateSkills,
   validateLinks,
+  validateGenres,
 } = require('../../models/Profile');
 const auth = require('../../middleware/auth');
 const { UserModel } = require('../../models/User');
@@ -239,6 +240,28 @@ router.put('/education/:edu_id', auth, async (req, res) => {
   }
 });
 
+// @route   PUT api/profile/links/links_id
+// @desc    Delete a link by link_id
+// @access  Private
+
+router.put('/links/:link_id', auth, async (req, res) => {
+  const { link_id } = req.params;
+
+  try {
+    let profile = await ProfileModel.findOne({ user: req.user._id });
+    if (!profile) return res.status(404).send('Profile not found');
+
+    profile.links = profile.links.filter(
+      (link) => link._id.toString() !== link_id
+    );
+    await profile.save();
+    res.json(profile);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error, please try again later');
+  }
+});
+
 // @route   PUT api/profile/skills/skill_id
 // @desc    Delete a skill by skill_id
 // @access  Private
@@ -261,7 +284,7 @@ router.put('/skills/:skill_id', auth, async (req, res) => {
   }
 });
 
-// @route   PUT api/profile/image
+// @route   POST api/profile/image
 // @desc    Add a profile image
 // @access  Private
 
@@ -284,5 +307,56 @@ router.post('/image', auth, upload.single('image'), async (req, res) => {
     res.status(500).send('Server Error, please try again later');
   }
 });
+
+// @route   PUT api/profile/genres
+// @desc    Add to "genres" array
+// @access  Private
+
+router.put('/genres', auth, async (req, res) => {
+  console.log(req.body);
+  const { error } = validateGenres(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  try {
+    let profile = await ProfileModel.findOne({
+      user: req.user._id,
+    });
+    if (!profile) return res.status(404).send('Profile not found');
+    profile.genres.unshift(req.body);
+    await profile.save();
+    res.json(profile);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error, please try again later');
+  }
+});
+
+// @route   PUT api/profile/genres/:id
+// @desc    remove from "genres" array
+// @access  Private
+
+router.put('/genres/:id', auth, async (req, res) => {
+  console.log('works');
+  try {
+    let profile = await ProfileModel.findOne({
+      user: req.user._id,
+    });
+    if (!profile) return res.status(404).send('Profile not found');
+    profile.genres = profile.genres.filter((genre) => {
+      return genre._id.toString() !== req.params.id;
+    });
+    await profile.save();
+    res.json(profile);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error, please try again later');
+  }
+});
+
+// // @route   PUT api/profile/posts/:id
+// // @desc    Apply to post (add post to applied list)
+// // @access  Private
+
+// router.put('/');
 
 module.exports = router;

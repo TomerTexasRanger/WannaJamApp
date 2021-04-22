@@ -25,6 +25,10 @@ const postSchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 400,
   },
+  region: {
+    type: String,
+  },
+
   image: {
     type: mongoose.Schema.Types.String,
     ref: 'profile',
@@ -37,6 +41,9 @@ const postSchema = new mongoose.Schema({
       },
     },
   ],
+  paid: {
+    type: Boolean,
+  },
   date: { type: Date, default: Date.now },
 });
 
@@ -44,6 +51,8 @@ const validatePost = (post) => {
   const schema = Joi.object({
     text: Joi.string().min(2).max(400).required(),
     headline: Joi.string().min(2).max(100).required(),
+    region: Joi.string().required(),
+    paid: Joi.bool().required(),
   });
   return schema.validate(post);
 };

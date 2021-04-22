@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getCurrentProfile } from '../../../actions/profilesActions';
+import {
+  getCurrentProfile,
+  removeSkill,
+  removeLink,
+} from '../../../actions/profilesActions';
 import Loader from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 import PageHeader from '../../layout/PageHeader';
@@ -8,10 +12,14 @@ import TopLeft from './TopLeft';
 import TopRight from './TopRight';
 import Bottom from './Bottom';
 import Links from './Links';
+import ProfilePostManger from './ProfilePostManger';
+import Moment from 'react-moment';
 
 const Dashboard = ({
+  removeLink,
+  removeSkill,
   getCurrentProfile,
-  auth: { user },
+  auth: { user, date },
   profile: { loading, profile },
 }) => {
   useEffect(() => {
@@ -29,6 +37,9 @@ const Dashboard = ({
       <PageHeader titleText={'Dashbord'} />
       <i className="fas fa-user"></i>
       <h3 className=""> Welcome {user && user.name}</h3>
+      <h4>
+        Joined : <Moment format="DD/MM/YYYY">{date}</Moment>
+      </h4>
       {profile !== null ? (
         <>
           <div className="d-flex justify-content-end">
@@ -38,14 +49,25 @@ const Dashboard = ({
           </div>
 
           <div className="profile-grid my-1">
-            <TopLeft profile={profile} />
+            <TopLeft profile={profile} user={user} />
             <div className="profile-right bg-light p-2">
-              <TopRight profile={profile} />
+              <TopRight
+                profile={profile}
+                user={user}
+                loading={loading}
+                removeSkill={removeSkill}
+              />
             </div>
-            <Bottom profile={profile} />
+            <Bottom profile={profile} user={user} loading={loading} />
 
-            <Links profile={profile} />
+            <Links
+              profile={profile}
+              user={user}
+              loading={loading}
+              removeLink={removeLink}
+            />
           </div>
+          <ProfilePostManger />
         </>
       ) : (
         <>
@@ -71,4 +93,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);
+export default connect(mapStateToProps, {
+  getCurrentProfile,
+  removeSkill,
+  removeLink,
+})(Dashboard);

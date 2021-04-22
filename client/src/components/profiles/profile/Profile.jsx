@@ -13,7 +13,7 @@ const Profile = ({
   match,
   getProfileById,
   profile: { profile, loading },
-  auth,
+  auth: { user },
 }) => {
   useEffect(() => {
     getProfileById(match.params.id);
@@ -34,12 +34,12 @@ const Profile = ({
           </Link>
           <PageHeader titleText={'Profile page'} />
           <div className="profile-grid my-1">
-            <TopLeft profile={profile} />
+            <TopLeft profile={profile} user={user} />
             <div className="profile-right bg-light p-2">
-              <TopRight profile={profile} />
+              <TopRight profile={profile} user={user} />
             </div>
-            <Bottom profile={profile} />
-            <Links profile={profile} />
+            <Bottom profile={profile} user={user} />
+            <Links profile={profile} user={user} />
           </div>
         </div>
       )}

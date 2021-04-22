@@ -92,10 +92,11 @@ class CreateProfile extends Form {
                 value={this.state.data.region}
                 onChange={this.handleChange}
               >
-                <option value="north">North</option>
-                <option value="center">Center</option>
-                <option value="south">South</option>
-                <option value="other">Other</option>
+                <option value="">Choose region </option>
+                <option value="North">North</option>
+                <option value="Center">Center</option>
+                <option value="South">South</option>
+                <option value="Other">Other</option>
               </select>
               {this.renderInput('phone', '* Phone:')}
               {this.renderInput('experience', 'Experience:')}

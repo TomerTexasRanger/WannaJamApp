@@ -37,6 +37,24 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
+// @route   GET api/posts/applied
+// @desc    Get all posts that the user applied to
+// @access  Private
+
+router.get('/applied', auth, async (req, res) => {
+  console.log('works');
+  try {
+    let profile = await ProfileModel.findOne({ user: req.user._id });
+    let posts = await PostModel.find({ 'apply.userProfile': profile._id });
+
+    // console.log(posts);
+    res.json(posts);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error, please try again later');
+  }
+});
+
 // @route   GET api/posts
 // @desc    Get all posts
 // @access  Private
@@ -52,6 +70,24 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
+// @route   GET api/posts/me
+// @desc    Get all users posts
+// @access  Private
+
+router.get('/me', auth, async (req, res) => {
+  try {
+    // let profile = await ProfileModel.find({ user: req.user._id });
+    let posts = await PostModel.find({ user: req.user._id }).sort({
+      date: -1,
+    });
+    console.log(posts);
+    res.json(posts);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error, please try again later');
+  }
+});
+
 // @route   GET api/posts/:id
 // @desc    Get post by ID
 // @access  Private
@@ -60,7 +96,7 @@ router.get('/:id', auth, async (req, res) => {
   try {
     let post = await PostModel.findOne({ _id: req.params.id });
     if (!post) return res.status(404).send('Post was not found');
-
+    console.log(post);
     res.json(post);
   } catch (err) {
     console.log(err.message);
@@ -138,6 +174,7 @@ router.put('/unapply/:id', auth, async (req, res) => {
     const profile = await ProfileModel.findOne({ user: req.user._id });
 
     const post = await PostModel.findById(req.params.id);
+    console.log(post);
     if (!post) return res.status(404).send('Post was not found');
     //Check if the post has already been applyed
     if (

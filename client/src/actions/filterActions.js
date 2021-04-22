@@ -13,11 +13,11 @@ export const filterByName = (data, profiles) => {
 export const filterByAge = (age, profiles) => {
   console.log(profiles);
   const filterProfiles = profiles.filter((profile) => {
-    if (age === 'a') {
+    if (age === '18-30') {
       return profile.age >= 18 && profile.age <= 30;
-    } else if (age === 'b') {
+    } else if (age === '30-50') {
       return profile.age >= 30 && profile.age <= 50;
-    } else if (age === 'c') {
+    } else if (age === '50+') {
       return profile.age >= 50;
     } else {
       return profile;
@@ -27,15 +27,15 @@ export const filterByAge = (age, profiles) => {
   return filterProfiles;
 };
 
-//Filter by region
+//Filter Profiles by region
 export const filterByRegion = (region, profiles) => {
   const filterProfiles = profiles.filter((profile) => {
-    if (region === 'north') {
-      return profile.region === 'north';
-    } else if (region === 'center') {
-      return profile.region === 'center';
-    } else if (region === 'south') {
-      return profile.region === 'south';
+    if (region === 'North') {
+      return profile.region === 'North';
+    } else if (region === 'Center') {
+      return profile.region === 'Center';
+    } else if (region === 'South') {
+      return profile.region === 'South';
     } else {
       return profile;
     }
@@ -55,4 +55,52 @@ export const filterByInstrument = (instrument, profiles) => {
   });
   console.log(filterProfiles);
   return filterProfiles;
+};
+
+//Filter Posts by profile name
+export const filterPostsByName = (data, posts) => {
+  const filterPosts = posts.filter((post) => {
+    return post.userName.toLowerCase().split(' ').includes(data.toLowerCase());
+  });
+  console.log(filterPosts);
+  return filterPosts;
+};
+
+//Filter posts by instrument
+export const filterPostsByInstrument = (instrument, posts) => {
+  const filterPosts = posts.filter((post) => {
+    return post.headline
+      .toLowerCase()
+      .split(' ')
+      .includes(instrument.toLowerCase());
+  });
+  return filterPosts;
+};
+
+//Filter posts by region
+export const filterPostsByRegion = (region, posts) => {
+  const filterPosts = posts.filter((post) => {
+    if (region === 'North') {
+      return post.region === 'North';
+    } else if (region === 'Center') {
+      return post.region === 'Center';
+    } else if (region === 'South') {
+      return post.region === 'South';
+    } else {
+      return post;
+    }
+  });
+  return filterPosts;
+};
+
+//Filter posts by fee
+export const filterPostsByFee = (paid, posts) => {
+  const filterPosts = posts.filter((post) => {
+    if (paid === true) {
+      return post.paid == true;
+    } else {
+      return post.paid == false;
+    }
+  });
+  return filterPosts;
 };

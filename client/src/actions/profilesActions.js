@@ -125,6 +125,24 @@ export const addSkill = (formData, history) => async (dispatch) => {
   }
 };
 
+//Remove skills
+export const removeSkill = (id) => async (dispatch) => {
+  try {
+    const { data } = await axios.put(`/api/profile/skills/${id}`);
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: data,
+    });
+    toast('Skill Removed');
+    // history.push('/dashboard');
+  } catch (ex) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: ex.response.data,
+    });
+  }
+};
+
 //Add education
 export const addEducation = (formData, history) => async (dispatch) => {
   try {
@@ -135,6 +153,24 @@ export const addEducation = (formData, history) => async (dispatch) => {
     });
     toast('Education Added');
     history.push('/dashboard');
+  } catch (ex) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: ex.response.data,
+    });
+  }
+};
+
+//Remove education
+export const removeEducation = (id) => async (dispatch) => {
+  try {
+    const { data } = await axios.put(`/api/profile/education/${id}`);
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: data,
+    });
+    toast('Education Removed');
+    // history.push('/dashboard');
   } catch (ex) {
     dispatch({
       type: PROFILE_ERROR,
@@ -161,6 +197,24 @@ export const addLink = (formData, history) => async (dispatch) => {
   }
 };
 
+//Remove links
+export const removeLink = (id) => async (dispatch) => {
+  try {
+    const { data } = await axios.put(`/api/profile/links/${id}`);
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: data,
+    });
+    toast('Link Removed');
+    // history.push('/dashboard');
+  } catch (ex) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: ex.response,
+    });
+  }
+};
+
 //Add image
 export const addImage = (formData, history) => async (dispatch) => {
   try {
@@ -171,6 +225,44 @@ export const addImage = (formData, history) => async (dispatch) => {
     });
     // history.push('/dashboard');
     window.location = '/dashboard';
+  } catch (ex) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: ex.response,
+    });
+  }
+};
+
+//Add Genre
+export const addGenre = (formData) => async (dispatch) => {
+  console.log(formData);
+  try {
+    const { data } = await axios.put('/api/profile/genres', formData);
+    await dispatch({
+      type: UPDATE_PROFILE,
+      payload: data,
+    });
+    // history.push('/dashboard');
+    // window.location = '/dashboard';
+  } catch (ex) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: ex.response,
+    });
+  }
+};
+
+//Remove Genre
+export const removeGenre = (id) => async (dispatch) => {
+  console.log('works');
+  try {
+    const { data } = await axios.put(`/api/profile/genres/${id}`);
+    await dispatch({
+      type: UPDATE_PROFILE,
+      payload: data,
+    });
+    // history.push('/dashboard');
+    // window.location = '/dashboard';
   } catch (ex) {
     dispatch({
       type: PROFILE_ERROR,

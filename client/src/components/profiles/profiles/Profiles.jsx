@@ -17,6 +17,7 @@ import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
+import FilterBar from '../../common/FilterBar';
 
 const Profiles = ({ profile: { profiles, loading }, getAllProfiles }) => {
   useEffect(() => {
@@ -26,15 +27,44 @@ const Profiles = ({ profile: { profiles, loading }, getAllProfiles }) => {
     };
     fetchData();
   }, []);
-  const [data, setData] = useState('');
+  // const [data, setData] = useState('');
   const [filProfiles, setFillProfiles] = useState(profiles);
 
-  const handleNameFilter = (e) => {
-    e.preventDefault();
-    const filtered = filterByName(data, profiles);
-    setFillProfiles(filtered);
-  };
+  // const handleNameFilter = (e) => {
+  //   e.preventDefault();
+  //   const filtered = filterByName(data, profiles);
+  //   setFillProfiles(filtered);
+  // };
 
+  const categories = [
+    {
+      title: 'age',
+      names: ['18-30', '30-50', '50+'],
+      func: filterByAge,
+    },
+    {
+      title: 'region',
+      names: ['North', 'Center', 'South', 'Other'],
+      func: filterByRegion,
+    },
+    {
+      title: 'instrument',
+      names: [
+        'Guitar',
+        'Drums',
+        'Piano',
+        'Vocals',
+        'Strings',
+        'Percussion',
+        'Synths',
+        'Bass',
+        'Reeds',
+        'Brass',
+        'Other',
+      ],
+      func: filterByInstrument,
+    },
+  ];
   return (
     <>
       {loading ? (
@@ -47,7 +77,16 @@ const Profiles = ({ profile: { profiles, loading }, getAllProfiles }) => {
       ) : (
         <div className="container">
           <PageHeader titleText={'Browse Profiles...'} />
-          <Navbar bg="light" expand="lg" className="mb-3 shadow">
+
+          <FilterBar
+            // data={search}
+            // setData={set}
+            dataArr={profiles}
+            categories={categories}
+            stateFunc={setFillProfiles}
+          />
+
+          {/* <Navbar bg="light" expand="lg" className="mb-3 shadow">
             <Navbar.Brand href="#home">Filter By:</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav ">
@@ -220,7 +259,7 @@ const Profiles = ({ profile: { profiles, loading }, getAllProfiles }) => {
                 </button>
               </form>
             </Navbar.Collapse>
-          </Navbar>
+          </Navbar> */}
 
           {/* <nav className="navbar navbar-expand  navbar-light bg-light mb-2 shadow">
             <div className="container-fluid">

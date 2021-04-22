@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 
 const TopLeft = ({
+  user: { _id },
+  loading,
+
   profile: {
     image,
     userName,
@@ -10,13 +13,19 @@ const TopLeft = ({
     facebook,
     instagram,
     licensed,
+    user,
   },
 }) => {
   return (
     <div className="profile-left bg-primary p-2">
-      <Link className="btn btn-success" to="/add-image">
-        Upload Image
-      </Link>
+      {user._id && _id === user._id ? (
+        <Link className="btn btn-success p-1" to="/add-image">
+          Upload Image
+        </Link>
+      ) : (
+        ''
+      )}
+
       {!image ? (
         <>
           {' '}
