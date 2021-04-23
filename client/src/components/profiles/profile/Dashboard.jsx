@@ -4,7 +4,9 @@ import {
   getCurrentProfile,
   removeSkill,
   removeLink,
+  deleteProfile,
 } from '../../../actions/profilesActions';
+import { deleteUser } from '../../../actions/authActions';
 import Loader from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 import PageHeader from '../../layout/PageHeader';
@@ -16,6 +18,8 @@ import ProfilePostManger from './ProfilePostManger';
 import Moment from 'react-moment';
 
 const Dashboard = ({
+  deleteProfile,
+  deleteUser,
   removeLink,
   removeSkill,
   getCurrentProfile,
@@ -36,6 +40,16 @@ const Dashboard = ({
     <div className="container">
       <PageHeader titleText={'Dashbord'} />
       <i className="fas fa-user"></i>
+      <button
+        className="btn btn-danger"
+        onClick={() =>
+          window.confirm(
+            'Are you sure you want to delete your user and profile?'
+          ) && deleteUser()
+        }
+      >
+        Delete User
+      </button>
       <h3 className=""> Welcome {user && user.name}</h3>
       <h4>
         Joined : <Moment format="DD/MM/YYYY">{date}</Moment>
@@ -46,6 +60,17 @@ const Dashboard = ({
             <Link className="btn btn-success mr-0 " to="/edit-profile">
               Edit Profile
             </Link>
+            <button
+              onClick={() =>
+                window.confirm(
+                  'Are you Sure you want to delete your profile?'
+                ) && deleteProfile()
+              }
+              className="btn btn-danger ml-2 mr-0 "
+              to="/edit-profile"
+            >
+              Delete Profile
+            </button>
           </div>
 
           <div className="profile-grid my-1">
@@ -97,4 +122,6 @@ export default connect(mapStateToProps, {
   getCurrentProfile,
   removeSkill,
   removeLink,
+  deleteProfile,
+  deleteUser,
 })(Dashboard);

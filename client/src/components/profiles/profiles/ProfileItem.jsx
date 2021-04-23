@@ -8,15 +8,19 @@ const ProfileItem = ({
   return (
     <div className="profile bg-light">
       <div className="profileItem-image ">
-        <img
-          className=""
-          src={
-            image &&
-            require(`../../../../../Backend/public/uploads/images/${image}`)
-              .default
-          }
-          alt={userName}
-        ></img>
+        {image ? (
+          <img
+            className=""
+            src={
+              image &&
+              require(`../../../../../Backend/public/uploads/images/${image}`)
+                .default
+            }
+            alt={userName}
+          ></img>
+        ) : (
+          <h4>No Photo</h4>
+        )}
       </div>
 
       <div>

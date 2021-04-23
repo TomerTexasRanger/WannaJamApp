@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import './App.css';
 import Footer from './components/layout/Footer';
 import NavBar from './components/layout/NavBar';
+import Contact from './components/Contact';
 // import Landing from "./components/layout/Landing";
-import Wanted from './components/Wanted';
 import About from './components/About';
 import { Switch, Route } from 'react-router-dom';
 import Signup from './components/Signup';
@@ -50,8 +50,9 @@ function App() {
           <Switch>
             <Route path="/signin" component={Signin} />
             <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
             <Route path="/signup" component={Signup} />
-            <Route exact path="/" component={Wanted} />
+            <Route exact path="/" component={Profiles} />
             <ProtectedRoute path="/post/:id" component={Post} />
             <ProtectedRoute path="/profile/:id" component={Profile} />
             <ProtectedRoute path="/dashboard" component={Dashboard} />

@@ -4,7 +4,7 @@ import { logout } from '../../actions/authActions';
 
 const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light shadow-sm">
+    <nav className="navbar navbar-expand-lg navbar-light shadow-sm fixed-top">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           WannaJam
@@ -21,13 +21,6 @@ const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link className="nav-link" to="/about">
-                About
-              </Link>
-            </li>
-          </ul>
           <ul className="navbar-nav ml-auto">
             {!isAuthenticated && !loading && (
               <li className="nav-item">

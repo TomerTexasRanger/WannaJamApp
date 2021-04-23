@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   REGISTER_FAIL,
   REGISTER_SUCCESS,
@@ -8,8 +8,10 @@ import {
   LOAD_USER_ERROR,
   LOGOUT,
   CLEAR_PROFILE,
-} from "./actionTypes";
-import setAuthToken from "../services/httpServices";
+  PROFILE_ERROR,
+} from './actionTypes';
+import setAuthToken from '../services/httpServices';
+import { toast } from 'react-toastify';
 
 //Register User
 export const register = (data) => async (dispatch) => {
@@ -33,7 +35,7 @@ export const register = (data) => async (dispatch) => {
 //Login, get token and apply token to the axios headers
 export const login = (email, password) => async (dispatch) => {
   try {
-    const { data } = await axios.post("/api/auth", { email, password });
+    const { data } = await axios.post('/api/auth', { email, password });
     console.log(data.token);
     await dispatch({
       type: LOGIN_SUCCESS,
@@ -56,7 +58,7 @@ export const getCurrentUser = () => async (dispatch) => {
     setAuthToken(localStorage.token);
   }
   try {
-    const { data } = await axios.get("/api/users/me");
+    const { data } = await axios.get('/api/users/me');
     dispatch({
       type: USER_LOADED,
       payload: data,
@@ -73,4 +75,23 @@ export const getCurrentUser = () => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   dispatch({ type: CLEAR_PROFILE });
   dispatch({ type: LOGOUT });
+};
+
+//Delete user and profile
+export const deleteUser = () => async (dispatch) => {
+  try {
+    const { data } = await axios.delete('api/users/me');
+    dispatch({
+      type: LOAD_USER_ERROR,
+    });
+    dispatch({
+      type: PROFILE_ERROR,
+    });
+    toast.success('User and profile deleted');
+  } catch (ex) {
+    dispatch({
+      type: LOAD_USER_ERROR,
+      payload: ex.response.data,
+    });
+  }
 };

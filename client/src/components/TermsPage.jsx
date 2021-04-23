@@ -1,12 +1,12 @@
 import PageHeader from './layout/PageHeader';
 
-const About = () => {
+const Terms = () => {
   return (
     <>
       <div className="container">
-        <PageHeader titleText={'About WannaJam'} />{' '}
+        <PageHeader titleText={'Terms & Conditions'} />{' '}
         <div className="col-12">
-          <p className="t-lead">
+          <p className="t-lead mt-5">
             WannaJam is an online social network, created by Tomer Sapir in
             2021. <br /> Its goal is to create an index of musicians, <br />{' '}
             both professional and amateur, in order to assist them in finding
@@ -24,4 +24,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Terms;

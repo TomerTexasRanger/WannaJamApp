@@ -83,14 +83,13 @@ router.put('/', auth, async (req, res) => {
   }
 });
 
-// @route   DELETE api/profile/id
-// @desc    Delete a profile by ID
+// @route   DELETE api/profile
+// @desc    Delete users profile
 // @access  Private
 
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/', auth, async (req, res) => {
   try {
     const profile = await ProfileModel.deleteOne({
-      _id: req.params.id,
       user: req.user._id,
     });
     if (!profile) return res.status(404).send('Profile not found');

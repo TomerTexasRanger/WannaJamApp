@@ -12,6 +12,7 @@ import Loader from 'react-loader-spinner';
 import PostItem from './PostItem';
 import PostForm from './PostForm';
 import FilterBar from '../common/FilterBar';
+import Pagination from '../common/Pagination';
 const Posts = ({
   getCurrentProfile,
   getPosts,
@@ -29,11 +30,15 @@ const Posts = ({
     fetchData();
   }, []);
 
-  // const handleNameFilter = (e) => {
-  //   e.preventDefault();
-  //   const filtered = filterPostsByName(data, posts);
-  //   setFillPosts(filtered);
-  // };
+  //Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = fillPosts.slice(indexOfFirstItem, indexOfLastItem);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const categories = [
     {
@@ -98,6 +103,11 @@ const Posts = ({
             <h3>No results found</h3>
           )}
         </div>
+        <Pagination
+          itemsPerPage={itemsPerPage}
+          totalItems={fillPosts.length}
+          paginate={paginate}
+        />
       </section>
     </>
   );

@@ -20,7 +20,7 @@ class AddPost extends Form {
   schema = {
     headline: Joi.string().min(2).max(100).required(),
     text: Joi.string().min(10).max(1024).required(),
-    region: Joi.string().min(1).max(20),
+    region: Joi.string().min(1).max(20).required(),
     paid: Joi.bool().required(),
   };
 
@@ -42,12 +42,22 @@ class AddPost extends Form {
           <div className="col-lg-6">
             <form onSubmit={this.handleSubmit} autoComplete="off" method="POST">
               {this.renderInput('headline', 'Headline:')}
-              {this.renderInput('text', 'Text:', '')}
+              {/* {this.renderInput('text', 'Text:', '')} */}
+              <label htmlFor="text">Text:</label>
+              <textarea
+                className="form-control"
+                onChange={() => this.handleChange}
+                name="text"
+                id="text"
+                cols="30"
+                rows="5"
+                placeholder="(Will be hidden in the posts page)"
+              ></textarea>
               <label htmlFor="region">Region: </label>
               <select
                 name="region"
                 id="region"
-                className="ml-2"
+                className="ml-2 form-control "
                 value={this.state.data.region}
                 onChange={this.handleChange}
               >
@@ -68,6 +78,7 @@ class AddPost extends Form {
             </form>
           </div>
         </div>
+        <div className="line"></div>
       </div>
     );
   }

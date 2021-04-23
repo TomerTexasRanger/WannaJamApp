@@ -89,6 +89,22 @@ export const createProfile = (formData, history) => async (dispatch) => {
     });
   }
 };
+
+//Delete users profile
+export const deleteProfile = () => async (dispatch) => {
+  try {
+    await axios.delete('api/profile');
+    dispatch({
+      type: PROFILE_ERROR,
+    });
+  } catch (ex) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: ex.response,
+    });
+  }
+};
+
 //Update a profile
 export const updateProfile = (formData, history) => async (dispatch) => {
   try {

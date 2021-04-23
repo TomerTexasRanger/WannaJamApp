@@ -25,7 +25,6 @@ const Skill = ({ removeSkill, skill, _id = null, user = null }) => {
         </td>
         {_id && user._id && _id === user._id ? (
           <td>
-            {' '}
             <button
               onClick={() => {
                 removeSkill(skill._id);

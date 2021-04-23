@@ -9,7 +9,9 @@ const Input = ({
   return (
     <div className="form-group">
       <i className={icon}>
-        <label htmlFor={name}>{label}</label>
+        <label className="t-lead" htmlFor={name}>
+          {label}
+        </label>
         <input {...rest} name={name} id={name} className={bootClass} />
         {error && <span className="text-danger">{error}</span>}
       </i>

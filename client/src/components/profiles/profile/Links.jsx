@@ -12,7 +12,7 @@ const Links = ({ profile: { links, user }, user: { _id }, removeLink }) => {
             {links.length > 0 ? (
               links.map((link) => {
                 return (
-                  <li>
+                  <li key={link._id}>
                     <h3>{link.title}</h3>
                     <h5>
                       <a href={link.link}>{link.link}</a>

@@ -1,6 +1,4 @@
-# Test the fucking signin logout for Errors again. Remmember that the "Get current user function is in the auth action and reducer, because you need to establish if the user is authenticated and if the thing is loading.
-
-# Be cool dude, were still making good time, and you learned some things.
+<!-- # Test the fucking signin logout for Errors again. Remmember that the "Get current user function is in the auth action and reducer, because you need to establish if the user is authenticated and if the thing is loading. -->
 
 <!-- # Do the "addLink" schema  -->
 
@@ -8,33 +6,33 @@
 
 <!-- # Add the genre selector to the profile -->
 
-# Display the list of applyed Adds in the profile. and how many users applied to your add
+<!-- # Display the list of applyed Adds in the profile. and how many users applied to your add -->
 
-# inc the uploadimage componenent into the profile
+<!-- # inc the uploadimage componenent into the profile -->
 
-# make delete buttons for skills and education
+<!-- # make delete buttons for skills and education -->
 
-# make a filter for posts
+<!-- # make a filter for posts -->
 
-# figure out how to make the profile images with different resolution fit
+<!-- # figure out how to make the profile images with different resolution fit -->
 
-# make the filter component reusable
+<!-- # make the filter component reusable -->
 
 # Add proptypes to components
 
-# try making the age update
+<!-- # try making the age update -->
 
 # cancel the cors when you finish
 
 # improve error handling when you finish (posts.js line 63)
 
-# add a delete profile and user button
+<!-- # add a delete profile and user button -->
 
 <!-- # make updating the profile and posts unavalible for other users -->
 
-# users can make only one profile!
+<!-- # users can make only one profile! -->
 
-# add pagination
+<!-- # add pagination -->
 
 <!-- # Add Moment dates where needed -->
 
