@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const Pagination = ({ itemsPerPage, totalItems, paginate }) => {
   const pageNumbers = [];
 
@@ -19,6 +21,12 @@ const Pagination = ({ itemsPerPage, totalItems, paginate }) => {
       </ul>
     </nav>
   );
+};
+
+Pagination.prototype = {
+  itemsPerPage: PropTypes.string,
+  totalItems: PropTypes.string,
+  paginate: PropTypes.func,
 };
 
 export default Pagination;

@@ -1,22 +1,15 @@
 import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Loader from 'react-loader-spinner';
+import PropTypes from 'prop-types';
 import { getAllProfiles } from '../../../actions/profilesActions';
 import PageHeader from '../../layout/PageHeader';
 import ProfileItem from './ProfileItem';
 import {
-  filterByName,
   filterByAge,
   filterByRegion,
   filterByInstrument,
 } from '../../../actions/filterActions';
-import { Link } from 'react-router-dom';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Nav from 'react-bootstrap/Nav';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Button';
 import FilterBar from '../../common/FilterBar';
 import Pagination from '../../common/Pagination';
 
@@ -24,15 +17,17 @@ const Profiles = ({ profile: { profiles, loading }, getAllProfiles }) => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await getAllProfiles();
-      setFillProfiles(res);
+      await setFillProfiles(res);
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [filProfiles, setFillProfiles] = useState(profiles);
 
   //Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  const [itemsPerPage, setItemsPerPage] = useState(9);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -109,6 +104,11 @@ const Profiles = ({ profile: { profiles, loading }, getAllProfiles }) => {
       )}
     </>
   );
+};
+
+Profiles.prototype = {
+  profile: PropTypes.object,
+  getAllProfiles: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {

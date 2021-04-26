@@ -1,4 +1,5 @@
-import { Link, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import {
@@ -11,7 +12,6 @@ import {
 import { useEffect, useState } from 'react';
 
 const PostItem = ({
-  getPost,
   deletePost,
   applyToPost,
   unapplyToPost,
@@ -25,6 +25,7 @@ const PostItem = ({
       await checkIfApplied();
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const checkIfApplied = () => {
     if (
@@ -64,47 +65,6 @@ const PostItem = ({
           <p>
             Posted on <Moment format={'DD/MM/YY'}>{date}</Moment>
           </p>
-          {/* {apply.filter(
-            (app) => app.userProfile.toString() === profile.toString()
-          ).length > 0 ? (
-            <button
-              onClick={() => unapplyToPost(_id)}
-              className="btn btn-secondary float-right"
-            >
-              Unapply
-            </button>
-          ) : (
-            <button
-              onClick={() => applyToPost(_id)}
-              className="btn btn-success float-right"
-            >
-              Apply Now
-            </button>
-          )} */}
-          {/* {didApply &&
-          apply.filter(
-            (app) => app.userProfile.toString() === profile.toString()
-          ).length > 0 ? (
-            <button
-              onClick={() => {
-                unapplyToPost(_id);
-                setDidApply(false);
-              }}
-              className="btn btn-secondary float-right"
-            >
-              Unapply
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                applyToPost(_id);
-                setDidApply(true);
-              }}
-              className="btn btn-success float-right"
-            >
-              Apply Now
-            </button>
-          )} */}
 
           {didApply ? (
             <button
@@ -145,6 +105,15 @@ const PostItem = ({
       </div>
     </>
   );
+};
+
+PostItem.prototype = {
+  auth: PropTypes.object,
+  profile: PropTypes.object,
+  applyToPost: PropTypes.func,
+  unapplyToPost: PropTypes.func,
+  deletePost: PropTypes.func,
+  getPost: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/authActions';
@@ -6,7 +7,7 @@ const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light shadow-sm fixed-top">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand banner" to="/">
           WannaJam
         </Link>
         <button
@@ -25,7 +26,7 @@ const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
             {!isAuthenticated && !loading && (
               <li className="nav-item">
                 <Link className="nav-link" to="/signin">
-                  Signin
+                  Sign In
                 </Link>
               </li>
             )}
@@ -33,7 +34,7 @@ const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
             {!isAuthenticated && !loading && (
               <li className="nav-item">
                 <Link className="nav-link" to="/signup">
-                  Signup
+                  Sign Up
                 </Link>
               </li>
             )}
@@ -77,8 +78,12 @@ const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   );
 };
 
+NavBar.prototype = {
+  auth: PropTypes.object,
+  logout: PropTypes.func,
+};
+
 const mapStateToProps = (state) => ({
-  // user: state.usersReducer,
   auth: state.authReducer,
 });
 

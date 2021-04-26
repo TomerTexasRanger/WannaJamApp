@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const TopLeft = ({
   user: { _id },
-  loading,
 
   profile: {
     image,
@@ -17,9 +17,9 @@ const TopLeft = ({
   },
 }) => {
   return (
-    <div className="profile-left bg-col-primary p-2">
+    <div className="profile-left  p-2">
       {user._id && _id === user._id ? (
-        <Link className="btn btn-success p-1" to="/add-image">
+        <Link className="button button-light p-1 mb-1" to="/add-image">
           Upload Image
         </Link>
       ) : (
@@ -34,25 +34,26 @@ const TopLeft = ({
           </div>
         </>
       ) : (
-        <img
-          className="my-1"
-          src={
-            require(`../../../../../Backend/public/uploads/images/${
-              image === '' ? '' : image
-            }`).default
-          }
-          alt={userName}
-        ></img>
+        <div className="profile-image">
+          <img
+            className="my-1"
+            src={
+              require(`../../../../../Backend/public/uploads/images/${
+                image === '' ? '' : image
+              }`).default
+            }
+            alt={userName}
+          ></img>
+        </div>
       )}
-
-      <h3>
+      <h4>
         <strong>Phone:</strong> {phone}
-      </h3>
-      <h3>
+      </h4>
+      <h4>
         <strong>Email:</strong> {email}
-      </h3>
+      </h4>
 
-      <div className="icons my-1">
+      <div className="icons my-1 mt-3">
         {
           <Link to="#">
             <i className="fas fa-globe fa-2x"></i>
@@ -79,6 +80,11 @@ const TopLeft = ({
       </div>
     </div>
   );
+};
+
+TopLeft.prototype = {
+  user: PropTypes.object,
+  profile: PropTypes.object,
 };
 
 export default TopLeft;

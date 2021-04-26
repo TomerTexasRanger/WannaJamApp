@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
 import Loader from 'react-loader-spinner';
@@ -17,6 +18,7 @@ const Profile = ({
 }) => {
   useEffect(() => {
     getProfileById(match.params.id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
@@ -29,13 +31,13 @@ const Profile = ({
         />
       ) : (
         <div className="container">
-          <Link to="/profiles" className="btn btn-primary">
+          <Link to="/profiles" className="button button-primary">
             Back To Profiles
           </Link>
           <PageHeader titleText={'Profile page'} />
           <div className="profile-grid my-1">
             <TopLeft profile={profile} user={user} />
-            <div className="profile-right bg-light p-2">
+            <div className="profile-right  p-2">
               <TopRight profile={profile} user={user} />
             </div>
             <Bottom profile={profile} user={user} />
@@ -45,6 +47,12 @@ const Profile = ({
       )}
     </>
   );
+};
+
+Profile.prototype = {
+  getProfileById: PropTypes.func,
+  profile: PropTypes.object,
+  auth: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {

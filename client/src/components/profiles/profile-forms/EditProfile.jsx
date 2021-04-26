@@ -4,7 +4,6 @@ import Form from '../../common/Form';
 import {
   updateProfile,
   getCurrentProfile,
-  addImage,
 } from '../../../actions/profilesActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
@@ -54,7 +53,7 @@ class EditProfile extends Form {
     userName: Joi.string().min(2).max(50).required(),
     bio: Joi.string().max(400).allow(''),
     licensed: Joi.bool().required(),
-    age: Joi.number().allow(''),
+    age: Joi.date().allow(''),
     location: Joi.string().min(2).max(200).required(),
     region: Joi.string(),
 
@@ -90,21 +89,36 @@ class EditProfile extends Form {
         <PageHeader titleText="Edit Your Profile:" />
         <div className="row">
           <div className="col-12">
-            <p>Fill out the necessary fields:</p>
+            <h3>Fill out the necessary fields, marked by '*':</h3>
           </div>
         </div>
         <div className="row">
           <div className="col-lg-6">
-            <form onSubmit={this.handleSubmit} autoComplete="off" method="POST">
+            <form
+              className="form"
+              onSubmit={this.handleSubmit}
+              autoComplete="off"
+              method="POST"
+            >
               {this.renderInput('userName', '* User Name:')}
-              {this.renderInput('age', 'Birth Date:', '', 'date')}
-              {this.renderInput('bio', 'Bio:')}
+              {this.renderInput('age', '* Birth Date:', '', 'date')}
+              <label htmlFor="bio" className="t-lead">
+                Bio
+              </label>
+              <textarea
+                className="font-control"
+                name="bio"
+                id="bio"
+                cols="30"
+                rows="2"
+                onChange={this.handleChange}
+              ></textarea>
               {this.renderInput('location', '* Location:')}
               <label htmlFor="region">Region: </label>
               <select
                 name="region"
                 id="region"
-                className="ml-2"
+                className=" form-control"
                 value={this.state.data.region}
                 onChange={this.handleChange}
               >
@@ -114,7 +128,17 @@ class EditProfile extends Form {
                 <option value="other">Other</option>
               </select>
               {this.renderInput('phone', '* Phone:')}
-              {this.renderInput('experience', 'Experience:')}
+              <label htmlFor="experience" className="t-lead">
+                Experience
+              </label>
+              <textarea
+                className="font-control"
+                name="experience"
+                id="experience"
+                cols="30"
+                rows="2"
+                onChange={this.handleChange}
+              ></textarea>
               {this.renderInput(
                 'licensed',
                 'Licensed?:',

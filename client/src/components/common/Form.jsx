@@ -27,7 +27,7 @@ class Form extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log('works');
     const errors = this.validate();
     this.setState({ errors: errors || {} });
     if (errors) return;
@@ -50,7 +50,7 @@ class Form extends Component {
   };
 
   renderButton(label) {
-    return <button className="btn btn-primary">{label}</button>;
+    return <button className="button button-primary">{label}</button>;
   }
 
   renderInput(name, label, icon, type = 'text', bootClass) {

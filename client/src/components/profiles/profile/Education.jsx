@@ -1,17 +1,18 @@
+import PropTypes from 'prop-types';
+
 const Education = ({
   edu: { _id, school, degree, description },
   removeEducation,
 }) => {
   return (
     <>
-      <h2 className="text-primary">Education</h2>
       <div>
-        <h3>
+        <h4>
           <strong>School:</strong> {school}
-        </h3>
-        <h3>
+        </h4>
+        <h4>
           <strong>Degree/Certificate:</strong> {degree}
-        </h3>
+        </h4>
         <p>
           <strong>Description:</strong> {description}
         </p>
@@ -28,6 +29,11 @@ const Education = ({
       <div className="line"></div>
     </>
   );
+};
+
+Education.prototype = {
+  edu: PropTypes.object,
+  removeEducation: PropTypes.func,
 };
 
 export default Education;

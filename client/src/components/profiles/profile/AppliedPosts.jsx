@@ -1,14 +1,8 @@
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 
-const AppliedPosts = ({
-  profile: { _id },
-  posts,
-  unapplyToPost,
-  getAppliedPosts,
-  getPost,
-}) => {
+const AppliedPosts = ({ posts, unapplyToPost, getAppliedPosts, getPost }) => {
   return (
     <>
       <div>
@@ -50,6 +44,13 @@ const AppliedPosts = ({
       </div>
     </>
   );
+};
+
+AppliedPosts.prototype = {
+  posts: PropTypes.array,
+  unapplyToPost: PropTypes.func,
+  getAppliedPosts: PropTypes.func,
+  getPost: PropTypes.func,
 };
 
 export default AppliedPosts;

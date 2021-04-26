@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { FaStar } from 'react-icons/fa';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -31,6 +32,11 @@ const StarRating = ({ starValue, starNum = null }) => {
       })}
     </div>
   );
+};
+
+StarRating.propTypes = {
+  starValue: PropTypes.number,
+  starNum: PropTypes.number,
 };
 
 export default StarRating;

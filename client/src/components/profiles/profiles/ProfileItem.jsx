@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Skill from '../profile/Skill';
 
 const ProfileItem = ({
-  match,
   profile: { userName, location, _id, skills, image, age, genres },
 }) => {
   return (
-    <div className="profile bg-light">
-      <div className="profileItem-image ">
+    <div className="profile">
+      <div className="profileItem-image mb-2 ">
         {image ? (
           <img
             className=""
@@ -27,29 +27,37 @@ const ProfileItem = ({
         <h2>
           {userName} {age}
         </h2>
-        <p>{location}</p>
+        <h5>{location}</h5>
       </div>
       <div></div>
       <div className="line mt-0"></div>
       <div className="profiles-skills">
-        <table className=" ">
+        <table className="table table-borderless table-sm mb-0">
           <tbody>
-            {skills.slice(0, 3).map((skill) => {
+            {skills.slice(0, 2).map((skill) => {
               return <Skill key={skill._id} skill={skill} />;
             })}
           </tbody>
         </table>
       </div>
-      <ul className="profiles-genres mt-auto">
+      <ul className="profiles-genres mb-1 ">
         {genres.slice(0, 3).map((genre) => {
-          return <li key={genre._id}>*{genre.genre}</li>;
+          return (
+            <li key={genre._id}>
+              <h5>*{genre.genre}</h5>
+            </li>
+          );
         })}
       </ul>
-      <Link className="btn btn-primary mt-auto" to={`/profile/${_id}`}>
+      <Link className="button button-primary mt-auto" to={`/profile/${_id}`}>
         Profile
       </Link>
     </div>
   );
+};
+
+ProfileItem.prototype = {
+  profile: PropTypes.object,
 };
 
 export default ProfileItem;

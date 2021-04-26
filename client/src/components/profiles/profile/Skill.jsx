@@ -1,7 +1,5 @@
-import StarRating from '../../common/StarRating';
 import { FaStar } from 'react-icons/fa';
-import { useEffect, useState } from 'react';
-
+import PropTypes from 'prop-types';
 const buildStars = (stars) => {
   let addStars = [];
   let x = 0;
@@ -13,11 +11,12 @@ const buildStars = (stars) => {
 
 const Skill = ({ removeSkill, skill, _id = null, user = null }) => {
   const starNum = buildStars(skill.stars);
-  console.log(_id, user);
   return (
     <>
       <tr>
-        <td>{skill.instrument}</td>
+        <td className="">
+          <h5>{skill.instrument}</h5>
+        </td>
         <td>
           {starNum.map((item, i) => (
             <FaStar key={i} size={20} color={'gold'} />
@@ -30,7 +29,7 @@ const Skill = ({ removeSkill, skill, _id = null, user = null }) => {
                 removeSkill(skill._id);
                 window.location = '/dashboard';
               }}
-              className="btn btn-danger"
+              className="button button-danger"
             >
               X
             </button>
@@ -41,6 +40,12 @@ const Skill = ({ removeSkill, skill, _id = null, user = null }) => {
       </tr>
     </>
   );
+};
+
+Skill.prototype = {
+  removeSkill: PropTypes.func,
+  skill: PropTypes.object,
+  user: PropTypes.object,
 };
 
 export default Skill;

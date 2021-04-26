@@ -44,7 +44,7 @@ export const getAppliedPosts = () => async (dispatch) => {
   }
 };
 
-//Get all users posts
+//Get all my posts
 export const getMyPosts = () => async (dispatch) => {
   console.log('works');
   try {
@@ -118,7 +118,6 @@ export const addPost = (formData, history) => async (dispatch) => {
       payload: data,
     });
     toast.success('Post Created');
-    // await getPosts();
     window.location = '/posts';
   } catch (ex) {
     dispatch({

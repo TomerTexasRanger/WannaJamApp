@@ -1,25 +1,29 @@
+import PropTypes from 'prop-types';
+import { getCurrentProfile } from '../../actions/profilesActions';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getPosts } from '../../actions/postsActions';
 import {
-  filterPostsByName,
   filterPostsByInstrument,
   filterPostsByRegion,
   filterPostsByFee,
 } from '../../actions/filterActions';
-import { getCurrentProfile } from '../../actions/profilesActions';
 import Loader from 'react-loader-spinner';
 import PostItem from './PostItem';
 import PostForm from './PostForm';
 import FilterBar from '../common/FilterBar';
 import Pagination from '../common/Pagination';
+import PageHeader from '../layout/PageHeader';
+import { Redirect } from 'react-router';
+import { toast } from 'react-toastify';
+//
+//
 const Posts = ({
   getCurrentProfile,
   getPosts,
   posts: { posts, loading },
   profile: { profile },
 }) => {
-  // const [data, setData] = useState('');
   const [fillPosts, setFillPosts] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -28,11 +32,12 @@ const Posts = ({
       setFillPosts(res);
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage] = useState(10);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -79,38 +84,44 @@ const Posts = ({
     />
   ) : (
     <>
-      {' '}
-      <section className="container">
-        <h1 className="large text-primary">Posts</h1>
-        <p className="lead">
-          <i className="fas-fa-user"></i>Welcome to to whataddfladf
-        </p>
-        <PostForm />
-        <FilterBar
-          // data={data}
-          // setData={setData}
-          dataArr={posts}
-          categories={categories}
-          stateFunc={setFillPosts}
-        />
-        <div className="posts">
-          {console.log(fillPosts)}
-          {fillPosts.length > 0 ? (
-            fillPosts.map((post) => (
-              <PostItem key={post._id} post={post} profile={profile} />
-            ))
-          ) : (
-            <h3>No results found</h3>
-          )}
-        </div>
-        <Pagination
-          itemsPerPage={itemsPerPage}
-          totalItems={fillPosts.length}
-          paginate={paginate}
-        />
-      </section>
+      {profile === null ? (
+        <h2 className="container">
+          You must have a user profile in order to access this page
+        </h2>
+      ) : (
+        <section className="container">
+          <PageHeader titleText="Classifieds" />
+          <PostForm />
+          <FilterBar
+            dataArr={posts}
+            categories={categories}
+            stateFunc={setFillPosts}
+          />
+          <div className="posts">
+            {fillPosts.length > 0 ? (
+              currentItems.map((post) => (
+                <PostItem key={post._id} post={post} profile={profile} />
+              ))
+            ) : (
+              <h3>No results found</h3>
+            )}
+          </div>
+          <Pagination
+            itemsPerPage={itemsPerPage}
+            totalItems={fillPosts.length}
+            paginate={paginate}
+          />
+        </section>
+      )}
     </>
   );
+};
+
+Posts.prototype = {
+  posts: PropTypes.object,
+  profile: PropTypes.object,
+  getPosts: PropTypes.func,
+  getCurrentProfile: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {

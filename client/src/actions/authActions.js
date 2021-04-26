@@ -80,7 +80,7 @@ export const logout = () => async (dispatch) => {
 //Delete user and profile
 export const deleteUser = () => async (dispatch) => {
   try {
-    const { data } = await axios.delete('api/users/me');
+    await axios.delete('api/users/me');
     dispatch({
       type: LOAD_USER_ERROR,
     });

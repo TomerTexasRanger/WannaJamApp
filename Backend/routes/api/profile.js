@@ -27,10 +27,6 @@ router.post('/', auth, async (req, res) => {
   });
   try {
     post = await profile.save();
-    //Attach new profile to the user's "profiles" array
-    // let user = await UserModel.findById(req.user._id);
-    // user.profiles.push(post);
-    // await user.save();
     res.send(post);
   } catch (err) {
     console.log(err.message);
@@ -288,10 +284,6 @@ router.put('/skills/:skill_id', auth, async (req, res) => {
 // @access  Private
 
 router.post('/image', auth, upload.single('image'), async (req, res) => {
-  // const { error } = validateLinks(req.body);
-  // if (error) return res.status(400).send(error.details[0].message);
-  console.log(req.file.filename);
-
   try {
     let profile = await ProfileModel.findOne({
       user: req.user._id,
@@ -351,11 +343,5 @@ router.put('/genres/:id', auth, async (req, res) => {
     res.status(500).send('Server Error, please try again later');
   }
 });
-
-// // @route   PUT api/profile/posts/:id
-// // @desc    Apply to post (add post to applied list)
-// // @access  Private
-
-// router.put('/');
 
 module.exports = router;

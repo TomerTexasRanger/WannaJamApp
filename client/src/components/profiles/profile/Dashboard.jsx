@@ -1,14 +1,15 @@
+import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { deleteUser } from '../../../actions/authActions';
+import { Link } from 'react-router-dom';
 import {
   getCurrentProfile,
   removeSkill,
   removeLink,
   deleteProfile,
 } from '../../../actions/profilesActions';
-import { deleteUser } from '../../../actions/authActions';
 import Loader from 'react-loader-spinner';
-import { Link } from 'react-router-dom';
 import PageHeader from '../../layout/PageHeader';
 import TopLeft from './TopLeft';
 import TopRight from './TopRight';
@@ -28,6 +29,7 @@ const Dashboard = ({
 }) => {
   useEffect(() => {
     getCurrentProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return loading && profile === null ? (
     <Loader
@@ -39,9 +41,14 @@ const Dashboard = ({
   ) : (
     <div className="container">
       <PageHeader titleText={'Dashbord'} />
+
+      <h3 className=""> Welcome {user && user.name}</h3>
+      <h4>
+        Joined : <Moment format="DD/MM/YYYY">{date}</Moment>
+      </h4>
       <i className="fas fa-user"></i>
       <button
-        className="btn btn-danger"
+        className="button button-danger mt-0"
         onClick={() =>
           window.confirm(
             'Are you sure you want to delete your user and profile?'
@@ -50,14 +57,10 @@ const Dashboard = ({
       >
         Delete User
       </button>
-      <h3 className=""> Welcome {user && user.name}</h3>
-      <h4>
-        Joined : <Moment format="DD/MM/YYYY">{date}</Moment>
-      </h4>
       {profile !== null ? (
         <>
           <div className="d-flex justify-content-end">
-            <Link className="btn btn-success mr-0 " to="/edit-profile">
+            <Link className="button button-light mr-0 " to="/edit-profile">
               Edit Profile
             </Link>
             <button
@@ -66,7 +69,7 @@ const Dashboard = ({
                   'Are you Sure you want to delete your profile?'
                 ) && deleteProfile()
               }
-              className="btn btn-danger ml-2 mr-0 "
+              className="button button-danger ml-2 mr-0 "
               to="/edit-profile"
             >
               Delete Profile
@@ -75,7 +78,7 @@ const Dashboard = ({
 
           <div className="profile-grid my-1">
             <TopLeft profile={profile} user={user} />
-            <div className="profile-right bg-light p-2">
+            <div className="profile-right  p-2">
               <TopRight
                 profile={profile}
                 user={user}
@@ -96,12 +99,14 @@ const Dashboard = ({
         </>
       ) : (
         <>
-          <p>Wanna jam?, show us what you got by creating a profile</p>
-          <Link to="/create-profile" className="btn btn-primary">
+          <h3 className="mt-5 mb-5">
+            Wanna jam?, show us what you got by creating a profile
+          </h3>
+          <Link to="/create-profile" className="button button-primary mb-3">
             Create a profile
           </Link>
           <br />
-          <i>
+          <i className="">
             You cannot send or recieve messages, and you cannot apply for adds
             without a profile{' '}
           </i>
@@ -109,6 +114,16 @@ const Dashboard = ({
       )}
     </div>
   );
+};
+
+Dashboard.prototype = {
+  deleteProfile: PropTypes.func,
+  deleteUser: PropTypes.func,
+  removeLink: PropTypes.func,
+  removeSkill: PropTypes.func,
+  getCurrentProfile: PropTypes.func,
+  auth: PropTypes.object,
+  profile: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {

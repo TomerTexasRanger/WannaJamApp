@@ -18,7 +18,7 @@
 
 <!-- # make the filter component reusable -->
 
-# Add proptypes to components
+<!-- # Add proptypes to components -->
 
 <!-- # try making the age update -->
 
@@ -42,4 +42,4 @@
 
 # Add colors to social icons
 
-# make "About" "contact" and "terms" pages
+<!-- # make "About" "contact" and "terms" pages -->

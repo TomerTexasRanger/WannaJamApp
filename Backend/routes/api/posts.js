@@ -47,7 +47,6 @@ router.get('/applied', auth, async (req, res) => {
     let profile = await ProfileModel.findOne({ user: req.user._id });
     let posts = await PostModel.find({ 'apply.userProfile': profile._id });
 
-    // console.log(posts);
     res.json(posts);
   } catch (err) {
     console.log(err.message);
@@ -76,7 +75,6 @@ router.get('/', auth, async (req, res) => {
 
 router.get('/me', auth, async (req, res) => {
   try {
-    // let profile = await ProfileModel.find({ user: req.user._id });
     let posts = await PostModel.find({ user: req.user._id }).sort({
       date: -1,
     });

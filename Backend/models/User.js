@@ -1,7 +1,7 @@
-const Joi = require("@hapi/joi");
-const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
-const jwtKey = require("../config/default.json");
+const Joi = require('@hapi/joi');
+const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const jwtKey = require('../config/default.json');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -28,13 +28,13 @@ const userSchema = new mongoose.Schema({
 });
 //TO DO change experation on token
 userSchema.methods.generateAuthToken = function () {
-  const token = jwt.sign({ _id: this._id }, jwtKey["JWT-KEY"], {
+  const token = jwt.sign({ _id: this._id }, jwtKey['JWT-KEY'], {
     expiresIn: 360000,
   });
   return token;
 };
 
-const UserModel = mongoose.model("user", userSchema);
+const UserModel = mongoose.model('user', userSchema);
 
 const validateUser = (user) => {
   const schema = Joi.object({
@@ -45,14 +45,5 @@ const validateUser = (user) => {
   return schema.validate(user);
 };
 
-// function validateProfiles(data) {
-//   const schema = Joi.object({
-//     profiles: Joi.array().min(1).required(),
-//   });
-
-//   return schema.validate(data);
-// }
-
 exports.UserModel = UserModel;
 exports.validate = validateUser;
-// exports.validateProfiles = validateProfiles;

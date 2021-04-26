@@ -1,5 +1,4 @@
 const Joi = require('@hapi/joi');
-const { max } = require('lodash');
 const mongoose = require('mongoose');
 
 const profileSchema = new mongoose.Schema({
@@ -154,8 +153,8 @@ const validateProfile = (profile) => {
 const validateEducation = (edu) => {
   const schema = Joi.object({
     school: Joi.string().min(2).max(50).required(),
-    degree: Joi.string().min(2).max(50),
-    description: Joi.string().max(200),
+    degree: Joi.string().min(2).max(50).allow(''),
+    description: Joi.string().max(200).allow(''),
   });
   return schema.validate(edu);
 };

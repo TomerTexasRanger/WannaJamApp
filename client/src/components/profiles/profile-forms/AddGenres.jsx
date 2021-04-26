@@ -1,10 +1,8 @@
-import PageHeader from '../../layout/PageHeader';
 import Joi from 'joi-browser';
 import Form from '../../common/Form';
 import { addGenre, getCurrentProfile } from '../../../actions/profilesActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import StarRating from '../../common/StarRating';
 
 class AddSkills extends Form {
   state = {
@@ -32,7 +30,12 @@ class AddSkills extends Form {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} autoComplete="off" method="POST">
+      <form
+        className="d-flex mb-3 form"
+        onSubmit={this.handleSubmit}
+        autoComplete="off"
+        method="POST"
+      >
         <select
           className="form-control p-0"
           name="genre"
@@ -50,8 +53,9 @@ class AddSkills extends Form {
           <option value="Folk">Folk</option>
           <option value="Metal">Metal</option>
           <option value="Punk">Punk</option>
+          <option value="Pop">Pop</option>
         </select>
-        <input className="btn btn-success p-1 m-1" type="submit" value="Add" />
+        <input className="button button-dark" type="submit" value="Add" />
       </form>
     );
   }

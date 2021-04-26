@@ -186,7 +186,6 @@ export const removeEducation = (id) => async (dispatch) => {
       payload: data,
     });
     toast('Education Removed');
-    // history.push('/dashboard');
   } catch (ex) {
     dispatch({
       type: PROFILE_ERROR,
@@ -222,7 +221,6 @@ export const removeLink = (id) => async (dispatch) => {
       payload: data,
     });
     toast('Link Removed');
-    // history.push('/dashboard');
   } catch (ex) {
     dispatch({
       type: PROFILE_ERROR,
@@ -239,7 +237,6 @@ export const addImage = (formData, history) => async (dispatch) => {
       type: UPDATE_PROFILE,
       payload: data,
     });
-    // history.push('/dashboard');
     window.location = '/dashboard';
   } catch (ex) {
     dispatch({
@@ -258,8 +255,6 @@ export const addGenre = (formData) => async (dispatch) => {
       type: UPDATE_PROFILE,
       payload: data,
     });
-    // history.push('/dashboard');
-    // window.location = '/dashboard';
   } catch (ex) {
     dispatch({
       type: PROFILE_ERROR,
@@ -277,8 +272,6 @@ export const removeGenre = (id) => async (dispatch) => {
       type: UPDATE_PROFILE,
       payload: data,
     });
-    // history.push('/dashboard');
-    // window.location = '/dashboard';
   } catch (ex) {
     dispatch({
       type: PROFILE_ERROR,

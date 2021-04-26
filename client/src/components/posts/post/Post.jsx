@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   getPost,
@@ -13,7 +14,6 @@ import { useEffect, useState } from 'react';
 import Loader from 'react-loader-spinner';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
-import Profiles from '../../profiles/profiles/Profiles';
 import ProfileItem from '../../profiles/profiles/ProfileItem';
 
 const Post = ({
@@ -37,6 +37,7 @@ const Post = ({
       await setDidApply(checkIfApplied());
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   console.log(post);
   const checkIfApplied = () => {
@@ -140,6 +141,7 @@ const Post = ({
           <div className="profiles">
             {post.apply &&
               post.apply.map((app) => {
+                // eslint-disable-next-line array-callback-return
                 return profiles.map((profile) => {
                   if (profile._id.toString() === app.userProfile.toString()) {
                     return <ProfileItem key={profile._id} profile={profile} />;
@@ -151,6 +153,18 @@ const Post = ({
       </section>
     </>
   );
+};
+
+Post.prototype = {
+  post: PropTypes.object,
+  auth: PropTypes.object,
+  profiles: PropTypes.object,
+  getAllProfiles: PropTypes.func,
+  getCurrentProfile: PropTypes.func,
+  getPost: PropTypes.func,
+  unapplyToPost: PropTypes.func,
+  applyToPost: PropTypes.func,
+  deletePost: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {

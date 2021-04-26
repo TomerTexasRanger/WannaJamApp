@@ -31,14 +31,14 @@ class AddLink extends Form {
         <PageHeader titleText="Add a Link" />
         <div className="row">
           <div className="col-12">
-            <p>Fill out the necessary fields:</p>
+            <h3>Fill out the necessary fields, marked by '*':</h3>
           </div>
         </div>
         <div className="row">
           <div className="col-lg-6">
             <form onSubmit={this.handleSubmit} autoComplete="off" method="POST">
-              {this.renderInput('title', 'Title:')}
-              {this.renderInput('link', 'Link:')}
+              {this.renderInput('title', '* Title:')}
+              {this.renderInput('link', ' *Link:')}
 
               {this.renderButton('Add Link')}
             </form>

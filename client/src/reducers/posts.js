@@ -1,4 +1,3 @@
-import { toast } from 'react-toastify';
 import {
   ADD_POST,
   DELETE_POST,

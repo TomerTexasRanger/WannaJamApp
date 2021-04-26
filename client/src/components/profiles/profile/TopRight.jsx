@@ -1,5 +1,6 @@
 import Skill from './Skill';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const TopRight = ({
   removeSkill,
@@ -9,13 +10,13 @@ const TopRight = ({
   return (
     <>
       <div className="top">
-        <h1 className="large">
+        <h2 className="t-large">
           {userName}, {age}
-        </h1>
+        </h2>
         <h3 className="">{location}</h3>
       </div>
       <div className="skills">
-        <h2 className="text-primary">Skills</h2>
+        <h2 className="">Skills</h2>
 
         {skills.length > 0 ? (
           <table className="table table-borderless">
@@ -37,7 +38,10 @@ const TopRight = ({
           <h5 className="text-center">No Skills Yet</h5>
         )}
         {_id === user._id ? (
-          <Link className="btn btn-secondary float-right" to="/add-skills">
+          <Link
+            className="button button-dark float-right mt-auto"
+            to="/add-skills"
+          >
             Add skills
           </Link>
         ) : (
@@ -45,11 +49,17 @@ const TopRight = ({
         )}
       </div>
       <div className="bio text-break">
-        <h2 className="text-primary">BIO</h2>
-        <p>{bio ? bio : <h5>No Bio Yet...</h5>}</p>
+        <h2 className="">BIO</h2>
+        <p className="t-lead">{bio ? bio : <h5>No Bio Yet...</h5>}</p>
       </div>
     </>
   );
+};
+
+TopRight.prototype = {
+  removeSkill: PropTypes.func,
+  profile: PropTypes.object,
+  user: PropTypes.object,
 };
 
 export default TopRight;

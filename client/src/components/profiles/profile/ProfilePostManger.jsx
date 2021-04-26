@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
@@ -31,6 +32,7 @@ const ProfilePostsManager = ({
       setMyPosts(await getMyPosts());
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleMyPosts = () => {
@@ -49,8 +51,8 @@ const ProfilePostsManager = ({
   return (
     <>
       <h2 className="text-center">Applications manager:</h2>
-      <div className="post-manager">
-        <div className="applied-posts">
+      <div className="post-manager ">
+        <div className="applied-posts bg-light">
           <AppliedPosts
             profile={profile}
             posts={posts}
@@ -59,7 +61,7 @@ const ProfilePostsManager = ({
             getPost={getPost}
           />
         </div>
-        <div className="my-posts">
+        <div className="my-posts bg-light">
           <MyPosts
             profile={profile}
             myPosts={myPosts}
@@ -70,6 +72,17 @@ const ProfilePostsManager = ({
       </div>
     </>
   );
+};
+
+ProfilePostsManager.prototype = {
+  unapplyToPost: PropTypes.func,
+  getPost: PropTypes.func,
+  getMyPosts: PropTypes.func,
+  deletePost: PropTypes.func,
+  getAppliedPosts: PropTypes.func,
+  getCurrentProfile: PropTypes.func,
+  profile: PropTypes.object,
+  post: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {

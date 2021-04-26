@@ -1,8 +1,8 @@
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
-import { connect } from 'react-redux';
 
-const MyPosts = ({ profile: { _id }, myPosts, deletePost, getMyPosts }) => {
+const MyPosts = ({ myPosts, deletePost, getMyPosts }) => {
   return (
     <>
       <div>
@@ -42,6 +42,12 @@ const MyPosts = ({ profile: { _id }, myPosts, deletePost, getMyPosts }) => {
       </div>
     </>
   );
+};
+
+MyPosts.prototype = {
+  myPosts: PropTypes.func,
+  deletePost: PropTypes.func,
+  getMyPosts: PropTypes.func,
 };
 
 export default MyPosts;

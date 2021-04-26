@@ -25,6 +25,7 @@ class AddPost extends Form {
   };
 
   doSubmit = async () => {
+    console.log('works');
     const { data } = this.state;
     this.props.addPost(data, this.props.history);
   };
@@ -35,25 +36,29 @@ class AddPost extends Form {
         <PageHeader titleText="Create an Add" />
         <div className="row">
           <div className="col-12">
-            <p>Fill out the necessary fields:</p>
+            <h3>Fill out the necessary fields, marked by '*':</h3>
           </div>
         </div>
         <div className="row">
           <div className="col-lg-6">
             <form onSubmit={this.handleSubmit} autoComplete="off" method="POST">
-              {this.renderInput('headline', 'Headline:')}
-              {/* {this.renderInput('text', 'Text:', '')} */}
-              <label htmlFor="text">Text:</label>
+              {this.renderInput('headline', '* Headline:')}
+              <label className="t-lead" htmlFor="text">
+                * Text:
+              </label>
               <textarea
+                value={this.state.data.text}
                 className="form-control"
-                onChange={() => this.handleChange}
+                onChange={this.handleChange}
                 name="text"
                 id="text"
                 cols="30"
                 rows="5"
                 placeholder="(Will be hidden in the posts page)"
               ></textarea>
-              <label htmlFor="region">Region: </label>
+              <label className="t-lead" htmlFor="region">
+                * Region:{' '}
+              </label>
               <select
                 name="region"
                 id="region"

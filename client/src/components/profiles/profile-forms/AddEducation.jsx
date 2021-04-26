@@ -1,16 +1,16 @@
-import PageHeader from "../../layout/PageHeader";
-import Joi from "joi-browser";
-import Form from "../../common/Form";
-import { addEducation } from "../../../actions/profilesActions";
-import { connect } from "react-redux";
-import { withRouter } from "react-router";
+import PageHeader from '../../layout/PageHeader';
+import Joi from 'joi-browser';
+import Form from '../../common/Form';
+import { addEducation } from '../../../actions/profilesActions';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
 class AddSkills extends Form {
   state = {
     data: {
-      school: "",
-      degree: "",
-      description: "",
+      school: '',
+      degree: '',
+      description: '',
     },
 
     errors: {},
@@ -18,8 +18,8 @@ class AddSkills extends Form {
 
   schema = {
     school: Joi.string().min(2).max(50).required(),
-    degree: Joi.string().max(400),
-    description: Joi.string().min(2).max(50),
+    degree: Joi.string().max(400).allow(''),
+    description: Joi.string().min(2).max(50).allow(''),
   };
 
   doSubmit = async () => {
@@ -33,17 +33,17 @@ class AddSkills extends Form {
         <PageHeader titleText="Add Education" />
         <div className="row">
           <div className="col-12">
-            <p>Fill out the necessary fields:</p>
+            <h3>Fill out the necessary fields, marked by '*':</h3>
           </div>
         </div>
         <div className="row">
           <div className="col-lg-6">
             <form onSubmit={this.handleSubmit} autoComplete="off" method="POST">
-              {this.renderInput("school", "* School:")}
-              {this.renderInput("degree", "Degree:")}
-              {this.renderInput("description", "Description:")}
+              {this.renderInput('school', '* School:')}
+              {this.renderInput('degree', 'Degree/ certificate:')}
+              {this.renderInput('description', 'Description:')}
 
-              {this.renderButton("Add Education")}
+              {this.renderButton('Add Education')}
             </form>
           </div>
         </div>
