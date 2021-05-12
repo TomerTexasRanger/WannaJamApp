@@ -49,8 +49,7 @@ const PostItem = ({
                 className="border shadow"
                 src={
                   image &&
-                  require(`../../../../Backend/public/uploads/images/${image}`)
-                    .default
+                  require(`../../../../public/uploads/images/${image}`).default
                 }
                 alt={userName}
               />

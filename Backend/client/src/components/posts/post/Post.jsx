@@ -83,7 +83,7 @@ const Post = ({
                 <img
                   className="my-1"
                   src={
-                    require(`../../../../../Backend/public/uploads/images/${
+                    require(`../../../../../public/uploads/images/${
                       post.image === '' ? '' : post.image
                     }`).default
                   }

@@ -54,7 +54,7 @@ function App() {
             <Route path="/contact" component={Contact} />
             <Route path="/signup" component={Signup} />
             <Route path="/terms" component={TermsPage} />
-            <Route exact path="/" component={Profiles} />
+            <ProtectedRoute exact path="/" component={Profiles} />
             <ProtectedRoute path="/post/:id" component={Post} />
             <ProtectedRoute path="/profile/:id" component={Profile} />
             <ProtectedRoute path="/dashboard" component={Dashboard} />

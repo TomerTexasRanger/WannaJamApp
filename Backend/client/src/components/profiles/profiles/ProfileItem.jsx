@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Skill from '../profile/Skill';
-
 const ProfileItem = ({
   profile: { userName, location, _id, skills, image, age, genres },
 }) => {
@@ -13,8 +12,7 @@ const ProfileItem = ({
             className=""
             src={
               image &&
-              require(`../../../../../Backend/public/uploads/images/${image}`)
-                .default
+              require(`../../../../../public/uploads/images/${image}`).default
             }
             alt={userName}
           ></img>

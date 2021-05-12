@@ -31,7 +31,7 @@ const Profiles = ({ profile: { profiles, loading }, getAllProfiles }) => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filProfiles.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filProfiles?.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -96,7 +96,7 @@ const Profiles = ({ profile: { profiles, loading }, getAllProfiles }) => {
             </div>
             <Pagination
               itemsPerPage={itemsPerPage}
-              totalItems={filProfiles.length}
+              totalItems={filProfiles?.length}
               paginate={paginate}
             />
           </main>

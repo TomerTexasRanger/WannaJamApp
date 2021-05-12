@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
 const TopLeft = ({
   user: { _id },
 
@@ -38,7 +37,7 @@ const TopLeft = ({
           <img
             className="my-1"
             src={
-              require(`../../../../../Backend/public/uploads/images/${
+              require(`../../../../../public/uploads/images/${
                 image === '' ? '' : image
               }`).default
             }
