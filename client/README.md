@@ -24,7 +24,7 @@
 
 # cancel the cors when you finish
 
-# improve error handling when you finish (posts.js line 63)
+<!-- # improve error handling when you finish (posts.js line 63) -->
 
 <!-- # add a delete profile and user button -->
 
@@ -40,6 +40,6 @@
 
 <!-- # "posts route (line 48) figure out how to return only the Applied for posts. check the mogoose documentation -->
 
-# Add colors to social icons
+<!-- # Add colors to social icons -->
 
 <!-- # make "About" "contact" and "terms" pages -->

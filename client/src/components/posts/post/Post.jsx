@@ -39,12 +39,10 @@ const Post = ({
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(post);
   const checkIfApplied = () => {
-    if (!loading && post !== null) {
+    if (!loading || post !== null) {
       if (
         post.apply.filter((app) => {
-          console.log('works');
           return app.userProfile.toString() === profile._id.toString();
         }).length > 0
       ) {
@@ -66,11 +64,12 @@ const Post = ({
     />
   ) : (
     <>
+      {checkIfApplied()}
       <section className="container">
-        <Link to={`/posts`} className="btn btn-info mb-2">
+        <Link to={`/posts`} className="button button-primary mb-2">
           Back To Classifieds
         </Link>
-        <div className="post bg-white p-1 my-1">
+        <div className="post bg-light p-1 my-1">
           <div>
             <Link to={`/profile/${post.profile}`}>
               {!post.image ? (
@@ -91,7 +90,7 @@ const Post = ({
                   alt={post.userName}
                 ></img>
               )}
-              <h4>{post.userName}</h4>
+              <h3>{post.userName}</h3>
             </Link>
           </div>
           <div>
@@ -108,7 +107,7 @@ const Post = ({
                   unapplyToPost(post._id);
                   setDidApply(false);
                 }}
-                className="btn btn-secondary float-right"
+                className="button button-dark float-right"
               >
                 Unapply
               </button>
@@ -118,7 +117,7 @@ const Post = ({
                   applyToPost(post._id);
                   setDidApply(true);
                 }}
-                className="btn btn-success float-right"
+                className="button button-success float-right"
               >
                 Apply Now
               </button>

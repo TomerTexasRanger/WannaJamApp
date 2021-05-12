@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { addImage } from '../../../actions/profilesActions';
 import { useState } from 'react';
 import { withRouter } from 'react-router';
+import PageHeader from '../../layout/PageHeader';
 
 const AddImage = ({ addImage, history }) => {
   const [image, setImage] = useState('');
@@ -28,6 +29,7 @@ const AddImage = ({ addImage, history }) => {
   return (
     <>
       <section className="container">
+        <PageHeader titleText={'Add A Profile Image'} />
         <div className="add-image">
           <div className="img-holder bg-light">
             {image === '' ? (

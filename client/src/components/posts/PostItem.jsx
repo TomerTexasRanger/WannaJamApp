@@ -41,7 +41,7 @@ const PostItem = ({
 
   return (
     <>
-      <div className="post bg-white p-1 my-1">
+      <div className="post p-1 my-1">
         <div>
           <Link to={`/profile/${profile._id}`}>
             {image ? (
@@ -55,9 +55,9 @@ const PostItem = ({
                 alt={userName}
               />
             ) : (
-              <h4>No Photo</h4>
+              <h3>No Photo</h3>
             )}
-            <h4>{userName}</h4>
+            <h3>{userName}</h3>
           </Link>
         </div>
         <div>
@@ -72,7 +72,7 @@ const PostItem = ({
                 unapplyToPost(_id);
                 setDidApply(false);
               }}
-              className="btn btn-secondary float-right"
+              className="button button-dark float-right"
             >
               Unapply
             </button>
@@ -82,12 +82,12 @@ const PostItem = ({
                 applyToPost(_id, profile.user._id);
                 setDidApply(true);
               }}
-              className="btn btn-success float-right"
+              className="button button-success float-right"
             >
               Apply Now
             </button>
           )}
-          <Link to={`/post/${_id}`} className="btn btn-info float-right">
+          <Link to={`/post/${_id}`} className="button button-info float-right">
             More Info
           </Link>
           {!auth.loading && user === auth.user._id && (
@@ -96,7 +96,7 @@ const PostItem = ({
                 deletePost(_id);
                 window.location = '/posts';
               }}
-              className="btn btn-danger float-right"
+              className="button button-danger float-right"
             >
               Delete
             </button>
