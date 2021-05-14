@@ -22,7 +22,7 @@ const FilterBar = ({ dataArr, categories, stateFunc }) => {
     }
   };
   return (
-    <Navbar expand="lg" className="mb-3 filter-bar " fixed="none" sticky="none">
+    <Navbar expand="lg" className="mb-3 filter-bar ">
       <Navbar.Brand href="#home">Filter By:</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav ">
