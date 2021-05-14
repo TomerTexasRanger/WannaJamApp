@@ -24,8 +24,8 @@ const FilterBar = ({ dataArr, categories, stateFunc }) => {
   return (
     <Navbar expand="lg" className="mb-3   filter-bar">
       <Navbar.Brand href="#home">Filter By:</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav ">
+      <Navbar.Toggle aria-controls="basic-nav-bar-nav" />
+      <Navbar.Collapse id="basic-nav-bar-nav ">
         <Nav className="mr-auto">
           {categories.map((category) => {
             return (
