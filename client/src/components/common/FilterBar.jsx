@@ -26,7 +26,7 @@ const FilterBar = ({ dataArr, categories, stateFunc }) => {
       <Navbar.Brand href="#home">Filter By:</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-nav-bar-nav" />
       <Navbar.Collapse id="basic-nav-bar-nav ">
-        <Nav className="">
+        <Nav className="mr-auto">
           {categories.map((category) => {
             return (
               <NavDropdown
