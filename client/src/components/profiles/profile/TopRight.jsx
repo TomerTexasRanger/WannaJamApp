@@ -50,7 +50,7 @@ const TopRight = ({
       </div>
       <div className="bio text-break">
         <h2 className="">BIO</h2>
-        <p className="t-lead">{bio ? bio : <h5>No Bio Yet...</h5>}</p>
+        <p className="t-lead">{bio ? bio : <p>No Bio Yet...</p>}</p>
       </div>
     </>
   );

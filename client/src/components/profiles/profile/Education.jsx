@@ -7,12 +7,12 @@ const Education = ({
   return (
     <>
       <div>
-        <h4>
+        <p>
           <strong>School:</strong> {school}
-        </h4>
-        <h4>
+        </p>
+        <p>
           <strong>Degree/Certificate:</strong> {degree}
-        </h4>
+        </p>
         <p>
           <strong>Description:</strong> {description}
         </p>

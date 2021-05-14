@@ -39,7 +39,7 @@ const Dashboard = ({
       className="d-flex justify-content-center mt-5"
     />
   ) : (
-    <div className="container">
+    <div className="container ">
       <PageHeader titleText={'Dashbord'} />
 
       <h3 className=""> Welcome {user && user.name}</h3>
@@ -48,7 +48,7 @@ const Dashboard = ({
       </h4>
       <i className="fas fa-user"></i>
       <button
-        className="button button-danger mt-0"
+        className="button button-danger mt-0 mb-5"
         onClick={() =>
           window.confirm(
             'Are you sure you want to delete your user and profile?'
@@ -76,7 +76,7 @@ const Dashboard = ({
             </button>
           </div>
 
-          <div className="profile-grid my-1">
+          <div className="profile-grid dashboard-profile my-1">
             <TopLeft profile={profile} user={user} />
             <div className="profile-right  p-2">
               <TopRight

@@ -15,7 +15,7 @@ const Skill = ({ removeSkill, skill, _id = null, user = null }) => {
     <>
       <tr>
         <td className="">
-          <h5>{skill.instrument}</h5>
+          <p>{skill.instrument}</p>
         </td>
         <td>
           {starNum.map((item, i) => (
