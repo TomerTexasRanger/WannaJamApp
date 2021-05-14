@@ -352,9 +352,6 @@ footer a {
   box-shadow: 1px 1px 4px #24282c, -1px -1px 4px #24282c;
   border-radius: 0.5rem;
 }
-.filter-bar-comp {
-  position: none !important;
-}
 .dropdown-item {
   color: red !important;
 }
