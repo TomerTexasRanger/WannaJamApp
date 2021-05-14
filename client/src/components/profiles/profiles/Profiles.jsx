@@ -79,6 +79,7 @@ const Profiles = ({ profile: { profiles, loading }, getAllProfiles }) => {
           <PageHeader titleText={'Browse Profiles...'} />
 
           <FilterBar
+            className="filter-bar-comp"
             dataArr={profiles}
             categories={categories}
             stateFunc={setFillProfiles}
