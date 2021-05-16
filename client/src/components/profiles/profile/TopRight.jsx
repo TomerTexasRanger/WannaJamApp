@@ -19,7 +19,7 @@ const TopRight = ({
         <h2 className="">Skills</h2>
 
         {skills.length > 0 ? (
-          <table className="table table-borderless">
+          <table className="table table-borderless ">
             <tbody>
               {skills.map((skill) => {
                 return (

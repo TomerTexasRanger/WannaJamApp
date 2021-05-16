@@ -16,7 +16,7 @@ const TopLeft = ({
   },
 }) => {
   return (
-    <div className="profile-left  p-2">
+    <div className="profile-left p-2  ">
       {user._id && _id === user._id ? (
         <Link className="button button-light p-1 mb-1" to="/add-image">
           Upload Image

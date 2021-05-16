@@ -78,7 +78,7 @@ const Dashboard = ({
 
           <div className="profile-grid dashboard-profile my-1">
             <TopLeft profile={profile} user={user} />
-            <div className="profile-right  p-2">
+            <div className="profile-right  p-2 ">
               <TopRight
                 profile={profile}
                 user={user}

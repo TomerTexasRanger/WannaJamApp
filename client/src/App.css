@@ -713,8 +713,6 @@ footer a {
     grid-template-columns: 1fr;
     text-align: center;
   }
-  .dashboard-profile {
-  }
   .profile ul {
     display: none;
   }
@@ -729,6 +727,9 @@ footer a {
       'gen'
       'links';
   }
+  .profile-left {
+  }
+
   .profile-left h4 {
     font-size: 1.1rem;
   }
@@ -743,8 +744,12 @@ footer a {
   .profile-right h2 {
     font-size: 2rem;
   }
+  .profile-exp {
+    margin: 0 !important;
+  }
   .profile-exp p {
     font-size: 1.3rem;
+    margin: 0;
   }
   .profile-edu p {
     font-size: 1.3rem;
@@ -786,5 +791,53 @@ footer a {
   .post a,
   .post button {
     padding: 0.3rem 0.4rem;
+  }
+  .post-manager {
+    grid-template-columns: 355px;
+  }
+  .my-posts td {
+    font-size: 0.7rem;
+  }
+  .my-posts button {
+    font-size: 0.7rem;
+  }
+  .applied-posts td {
+    font-size: 0.7rem;
+  }
+  .applied-posts button {
+    font-size: 0.7rem;
+  }
+  .skills {
+    border-right: none !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .profile-grid {
+    grid-template-columns: 347px;
+  }
+  .skills {
+    border-right: none !important;
+  }
+  .post-manager {
+    grid-template-columns: 315px;
+  }
+  .my-posts td {
+    font-size: 0.7rem;
+  }
+  .my-posts h6 {
+    font-size: 0.7rem;
+  }
+  .my-posts button {
+    font-size: 0.7rem;
+  }
+  .applied-posts td {
+    font-size: 0.7rem;
+  }
+  .applied-posts button {
+    font-size: 0.7rem;
+  }
+  .applied-posts h6 {
+    font-size: 0.7rem;
   }
 }

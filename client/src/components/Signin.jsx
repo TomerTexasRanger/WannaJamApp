@@ -4,7 +4,7 @@ import Joi from 'joi-browser';
 import Form from './common/Form';
 import { connect } from 'react-redux';
 import { login } from '../actions/authActions';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 class Signin extends Form {
   state = {
     data: { email: '', password: '' },
@@ -46,6 +46,10 @@ class Signin extends Form {
             </form>
           </div>
         </div>
+        <h3 className="mt-5">Dont have an account?</h3>
+        <p className="t-lead">
+          Click here to <Link to="/signup">Sign Up</Link>{' '}
+        </p>
       </div>
     );
   }
