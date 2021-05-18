@@ -10,7 +10,7 @@ const auth = require('./routes/api/auth');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
 connectDB();
-app.use(cors());
+// app.use(cors());
 app.use(express.json({ limit: '5mb' }));
 
 app.use('/api/users', users);

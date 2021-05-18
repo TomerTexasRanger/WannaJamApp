@@ -22,8 +22,8 @@ class Signin extends Form {
     const res = await this.props.login(email, password);
 
     res
-      ? this.props.history.replace('/')
-      : this.setState({ data: { password: '' } });
+      ? (window.location = '/')
+      : this.setState({ data: { email: '', password: '' } });
   };
 
   render() {
@@ -42,7 +42,7 @@ class Signin extends Form {
             <form onSubmit={this.handleSubmit} autoComplete="off" method="POST">
               {this.renderInput('email', 'Email', 'email')}
               {this.renderInput('password', 'Password', '', 'password')}
-              {this.renderButton('Signin')}
+              {this.renderButton('Sign in')}
             </form>
           </div>
         </div>
