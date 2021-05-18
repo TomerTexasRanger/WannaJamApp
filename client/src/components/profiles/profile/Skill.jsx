@@ -35,7 +35,7 @@ const Skill = ({ removeSkill, skill, _id = null, user = null }) => {
             </button>
           </td>
         ) : (
-          ''
+          <></>
         )}
       </tr>
     </>

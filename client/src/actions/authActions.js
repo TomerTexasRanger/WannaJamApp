@@ -36,7 +36,6 @@ export const register = (data) => async (dispatch) => {
 export const login = (email, password) => async (dispatch) => {
   try {
     const { data } = await axios.post('/api/auth', { email, password });
-    console.log(data.token);
     await dispatch({
       type: LOGIN_SUCCESS,
       payload: data.token,

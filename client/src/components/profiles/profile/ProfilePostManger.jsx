@@ -23,7 +23,6 @@ const ProfilePostsManager = ({
   post: { posts },
 }) => {
   const [myPosts, setMyPosts] = useState([]);
-  console.log(myPosts);
   useEffect(() => {
     const fetchData = async () => {
       await getCurrentProfile();

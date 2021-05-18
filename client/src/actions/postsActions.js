@@ -28,7 +28,6 @@ export const getPosts = () => async (dispatch) => {
 
 //Get posts Applied to
 export const getAppliedPosts = () => async (dispatch) => {
-  console.log('works');
   try {
     const { data } = await axios.get(`api/posts/applied`);
     dispatch({
@@ -46,7 +45,6 @@ export const getAppliedPosts = () => async (dispatch) => {
 
 //Get all my posts
 export const getMyPosts = () => async (dispatch) => {
-  console.log('works');
   try {
     const { data } = await axios.get(`api/posts/me`);
 

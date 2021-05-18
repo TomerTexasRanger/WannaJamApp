@@ -35,7 +35,7 @@ const StarRating = ({ starValue, starNum = null }) => {
 };
 
 StarRating.propTypes = {
-  starValue: PropTypes.number,
+  starValue: PropTypes.func,
   starNum: PropTypes.number,
 };
 

@@ -8,6 +8,7 @@ import {
   deletePost,
   getPost,
 } from '../../actions/postsActions';
+import { Image } from 'cloudinary-react';
 
 import { useEffect, useState } from 'react';
 
@@ -45,14 +46,15 @@ const PostItem = ({
         <div>
           <Link to={`/profile/${profile._id}`}>
             {image ? (
-              <img
-                className="border shadow"
-                src={
-                  image &&
-                  require(`../../../../public/uploads/images/${image}`).default
-                }
-                alt={userName}
-              />
+              // <img
+              //   className="border shadow"
+              //   src={
+              //     image &&
+              //     require(`../../../../public/uploads/images/${image}`).default
+              //   }
+              //   alt={userName}
+              // />
+              <Image cloudName="dq7ozi1cg" publicId={image.imgData} />
             ) : (
               <h3>No Photo</h3>
             )}

@@ -15,6 +15,7 @@ import Loader from 'react-loader-spinner';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import ProfileItem from '../../profiles/profiles/ProfileItem';
+import { Image } from 'cloudinary-react';
 
 const Post = ({
   profiles: { profiles, profile },
@@ -80,15 +81,16 @@ const Post = ({
                   </div>
                 </>
               ) : (
-                <img
-                  className="my-1"
-                  src={
-                    require(`../../../../../public/uploads/images/${
-                      post.image === '' ? '' : post.image
-                    }`).default
-                  }
-                  alt={post.userName}
-                ></img>
+                // <img
+                //   className="my-1"
+                //   src={
+                //     require(`../../../../../public/uploads/images/${
+                //       post.image === '' ? '' : post.image
+                //     }`).default
+                //   }
+                //   alt={post.userName}
+                // ></img>
+                <Image cloudName="dq7ozi1cg" publicId={post.image.imgData} />
               )}
               <h3>{post.userName}</h3>
             </Link>

@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { getImage } from '../../../actions/profilesActions';
+import { Image } from 'cloudinary-react';
 const TopLeft = ({
   user: { _id },
 
@@ -34,15 +37,8 @@ const TopLeft = ({
         </>
       ) : (
         <div className="profile-image">
-          <img
-            className="my-1"
-            src={
-              require(`../../../../../public/uploads/images/${
-                image === '' ? '' : image
-              }`).default
-            }
-            alt={userName}
-          ></img>
+          <Image cloudName="dq7ozi1cg" publicId={image.imgData} />
+          {/* <img className="my-1" src={cloudImg} alt={userName}></img> */}
         </div>
       )}
       <h4>

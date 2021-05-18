@@ -21,7 +21,7 @@ const Bottom = ({
         <h2 className="">Experience</h2>
         <div>
           <p className="lead">
-            {experience ? experience : <h5>No Experience Yet...</h5>}
+            {experience ? experience : <>No Experience Yet...</>}
           </p>
         </div>
       </div>
@@ -39,7 +39,7 @@ const Bottom = ({
             );
           })
         ) : (
-          <h4>No Education...</h4>
+          <p className="lead">No Education...</p>
         )}
 
         {_id === user._id && (
@@ -61,7 +61,7 @@ const Bottom = ({
                   return (
                     <tr key={genre._id}>
                       <td>
-                        <h5 className=""> * {genre.genre}</h5>
+                        <p> * {genre.genre}</p>
                       </td>
                       <td>
                         <button
@@ -81,7 +81,7 @@ const Bottom = ({
                   return (
                     <tr key={genre._id}>
                       <td>
-                        <h5 className=""> * {genre.genre}</h5>
+                        <h5> * {genre.genre}</h5>
                       </td>
                     </tr>
                   );

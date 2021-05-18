@@ -12,6 +12,7 @@ const {
 const auth = require('../../middleware/auth');
 const { UserModel } = require('../../models/User');
 const upload = require('../../middleware/multer');
+const { cloudinary } = require('../../config/cloudinary');
 
 // @route   POST api/profile
 // @desc    Create a profile
@@ -280,17 +281,16 @@ router.put('/skills/:skill_id', auth, async (req, res) => {
 });
 
 // @route   POST api/profile/image
-// @desc    Add a profile image
+// @desc    Add a profile image ID
 // @access  Private
-
-router.post('/image', auth, upload.single('image'), async (req, res) => {
+router.post('/image', auth, async (req, res) => {
   try {
     let profile = await ProfileModel.findOne({
       user: req.user._id,
     });
+    console.log(req.body);
     if (!profile) return res.status(404).send('Profile not found');
-
-    profile.image = req.file.filename;
+    profile.image = req.body;
     await profile.save();
     res.json(profile);
   } catch (err) {
@@ -299,11 +299,47 @@ router.post('/image', auth, upload.single('image'), async (req, res) => {
   }
 });
 
+// Old method
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// router.post('/image', auth, upload.single('image'), async (req, res) => {
+//   try {
+//     let profile = await ProfileModel.findOne({
+//       user: req.user._id,
+//     });
+//     if (!profile) return res.status(404).send('Profile not found');
+
+//     profile.image = req.file.filename;
+//     await profile.save();
+//     res.json(profile);
+//   } catch (err) {
+//     console.log(err.message);
+//     res.status(500).send('Server Error, please try again later');
+//   }
+// });
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// @route   POST api/profile/cloud/image
+// @desc    Add a profile image to cloudinary
+// @access  Private
+router.post('/cloud/image', auth, async (req, res) => {
+  try {
+    const fileStr = req.body.data;
+    const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+      upload_preset: 'wanna-jam',
+    });
+    console.log(uploadedResponse.public_id);
+    res.json(uploadedResponse.public_id);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error, please try again later');
+  }
+});
+
 // @route   PUT api/profile/genres
 // @desc    Add to "genres" array
 // @access  Private
 
-router.put('/genres', auth, async (req, res) => {
+https: router.put('/genres', auth, async (req, res) => {
   console.log(req.body);
   const { error } = validateGenres(req.body);
   if (error) return res.status(400).send(error.details[0].message);

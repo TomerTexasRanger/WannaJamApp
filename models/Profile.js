@@ -1,3 +1,4 @@
+const { object } = require('@hapi/joi');
 const Joi = require('@hapi/joi');
 const mongoose = require('mongoose');
 
@@ -42,9 +43,7 @@ const profileSchema = new mongoose.Schema({
     maxlength: 10,
   },
   image: {
-    type: String,
-
-    maxlength: 1024,
+    type: Object,
   },
   skills: [
     {
@@ -120,7 +119,7 @@ const validateProfile = (profile) => {
     region: Joi.string().required(),
     genre: Joi.string(),
     licensed: Joi.bool().required(),
-    image: Joi.string().max(1024).allow(''),
+    image: Joi.object().allow(''),
     phone: Joi.string()
       .min(9)
       .max(10)

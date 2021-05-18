@@ -30,7 +30,7 @@ const postSchema = new mongoose.Schema({
   },
 
   image: {
-    type: mongoose.Schema.Types.String,
+    type: mongoose.Schema.Types.Mixed,
     ref: 'profile',
   },
   apply: [

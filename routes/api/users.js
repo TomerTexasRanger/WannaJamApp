@@ -49,8 +49,8 @@ router.get('/me', auth, async (req, res) => {
 // @access  Private
 router.delete('/me', auth, async (req, res) => {
   try {
-    const profile = await ProfileModel.remove({ user: req.user._id });
-    const user = await UserModel.remove({ _id: req.user._id });
+    const profile = await ProfileModel.deleteOne({ user: req.user._id });
+    const user = await UserModel.deleteOne({ _id: req.user._id });
     res.json({ profile, user });
   } catch (err) {
     console.log(err.message);

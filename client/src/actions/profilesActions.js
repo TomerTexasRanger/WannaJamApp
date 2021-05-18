@@ -231,18 +231,49 @@ export const removeLink = (id) => async (dispatch) => {
 
 //Add image
 export const addImage = (formData, history) => async (dispatch) => {
+  // try {
+  //   const { data } = await axios.post('/api/profile/image', formData);
+  //   await dispatch({
+  //     type: UPDATE_PROFILE,
+  //     payload: data,
+  //   });
+  //   window.location = '/dashboard';
+  // } catch (ex) {
+  //   dispatch({
+  //     type: PROFILE_ERROR,
+  //     payload: ex.response,
+  //   });
+  // }
+  let imgData = '';
   try {
-    const { data } = await axios.post('/api/profile/image', formData);
-    await dispatch({
-      type: UPDATE_PROFILE,
-      payload: data,
+    await fetch('/api/profile/cloud/image', {
+      method: 'POST',
+
+      body: JSON.stringify({ data: formData }),
+      headers: {
+        'Content-type': 'application/json',
+        'x-auth-token': localStorage.getItem('token'),
+      },
+    }).then(async (response) => {
+      imgData = await response.json();
     });
-    window.location = '/dashboard';
-  } catch (ex) {
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: ex.response,
-    });
+    try {
+      imgData = imgData.toString();
+      console.log(imgData);
+      const { data } = await axios.post('/api/profile/image', { imgData });
+      await dispatch({
+        type: UPDATE_PROFILE,
+        payload: data,
+      });
+      window.location = '/dashboard';
+    } catch (ex) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: ex.response,
+      });
+    }
+  } catch (error) {
+    console.error(error);
   }
 };
 

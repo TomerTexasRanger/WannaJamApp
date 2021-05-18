@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Skill from '../profile/Skill';
+import { Image } from 'cloudinary-react';
 const ProfileItem = ({
   profile: { userName, location, _id, skills, image, age, genres },
 }) => {
@@ -8,15 +9,10 @@ const ProfileItem = ({
     <div className="profile">
       <div className="profileItem-image mb-2 ">
         {image ? (
-          <img
-            className=""
-            src={
-              image &&
-              require(`../../../../../public/uploads/images/${image}`).default
-            }
-            alt={userName}
-          ></img>
+          image && <Image cloudName="dq7ozi1cg" publicId={image.imgData} />
         ) : (
+          // require(`../../../../../public/uploads/images/${image}`).default
+
           <h4>No Photo</h4>
         )}
       </div>
