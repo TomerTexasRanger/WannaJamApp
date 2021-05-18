@@ -676,6 +676,9 @@ footer a {
   }
   .container {
     margin-top: 8rem;
+    width: 100%;
+    margin: 0.5rem;
+    padding: 0.5rem;
   }
   .x-l {
     font-size: 3rem;
