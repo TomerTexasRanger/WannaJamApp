@@ -814,7 +814,8 @@ footer a {
 
 @media (max-width: 400px) {
   .container {
-    min-width: 347px !important;
+    margin: 1rem;
+    padding: 1rem;
   }
   .profile-grid {
     grid-template-columns: 347px !important;
