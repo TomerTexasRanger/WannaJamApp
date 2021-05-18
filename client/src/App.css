@@ -813,8 +813,11 @@ footer a {
 }
 
 @media (max-width: 400px) {
+  .container {
+    min-width: 347px !important;
+  }
   .profile-grid {
-    grid-template-columns: 347px;
+    grid-template-columns: 347px !important;
   }
   .skills {
     border-right: none !important;
