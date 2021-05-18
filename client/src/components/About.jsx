@@ -11,7 +11,7 @@ const About = () => {
             2021. <br /> Its goal is to create an index of musicians, <br />{' '}
             both professional and amateur, in order to assist them in finding
             creative partners. <br /> Its users bank can range from big
-            production companys looking for session musicians, <br /> to middle
+            production companies looking for session musicians, <br /> to middle
             aged moms and dads looking to jam with some like minded individuals
             on weekends. <br /> Our mission is to provide a reliable, easy to
             use and easy to access platform in which people of all ages and

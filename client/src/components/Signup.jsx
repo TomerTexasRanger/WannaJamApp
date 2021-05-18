@@ -41,7 +41,7 @@ class Signup extends Form {
               {this.renderInput('email', 'Email', 'email')}
               {this.renderInput('password', 'Password', '', 'password')}
               {this.renderInput('name', 'Name')}
-              {this.renderButton('Signup')}
+              {this.renderButton('Sign Up')}
             </form>
           </div>
         </div>
