@@ -25,8 +25,8 @@ class AddPost extends Form {
   };
 
   doSubmit = async () => {
-    console.log('works');
     const { data } = this.state;
+    console.log('works');
     this.props.addPost(data, this.props.history);
   };
 
@@ -56,6 +56,11 @@ class AddPost extends Form {
                 rows="5"
                 placeholder="(Will be hidden in the posts page)"
               ></textarea>
+              {this.state.errors.text && (
+                <span className="text-danger d-block">
+                  {this.state.errors.text}
+                </span>
+              )}
               <label className="t-lead" htmlFor="region">
                 * Region:{' '}
               </label>

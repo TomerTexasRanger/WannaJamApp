@@ -24,7 +24,6 @@ const Posts = ({
   posts: { posts, loading },
   profile: { profile },
 }) => {
-  const [fillPosts, setFillPosts] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       await getCurrentProfile();
@@ -35,6 +34,7 @@ const Posts = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const [fillPosts, setFillPosts] = useState([]);
   //Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);

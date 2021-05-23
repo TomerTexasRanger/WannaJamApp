@@ -10,7 +10,8 @@ const { UserModel } = require('../../models/User');
 // @access  Private
 
 router.post('/', auth, async (req, res) => {
-  const { text, headline } = req.body;
+  console.log(req.body);
+  const { text, headline, region, paid } = req.body;
   const { error } = validatePost(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -27,6 +28,8 @@ router.post('/', auth, async (req, res) => {
       profile: profile._id,
       userName: profile.userName,
       image: profile.image,
+      region,
+      paid,
     });
     const post = await newPost.save();
     console.log(post);

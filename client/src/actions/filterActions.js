@@ -96,7 +96,7 @@ export const filterPostsByRegion = (region, posts) => {
 //Filter posts by fee
 export const filterPostsByFee = (paid, posts) => {
   const filterPosts = posts.filter((post) => {
-    if (paid === true) {
+    if (post.paid === true) {
       return post.paid === true;
     } else {
       return post.paid === false;
